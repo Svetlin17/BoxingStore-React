@@ -12,6 +12,9 @@
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 
+# Default Visual Studio React App
+BoxingStoreReactDefault/
+
 # Build results
 [Dd]ebug/
 [Dd]ebugPublic/

@@ -1,5 +1,10 @@
 namespace BoxingStore
 {
+    using Microsoft.AspNetCore.Builder;
+    using Microsoft.AspNetCore.Hosting;
+    using Microsoft.Extensions.Configuration;
+    using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.Extensions.Hosting;
     using BoxingStore.Data;
     using BoxingStore.Data.Models;
     using BoxingStore.Infrastructure;
@@ -8,14 +13,10 @@ namespace BoxingStore
     using BoxingStore.Services.Products;
     using BoxingStore.Services.Statistics;
     using BoxingStore.Services.User;
-    using Microsoft.AspNetCore.Builder;
-    using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
-    using Microsoft.Extensions.Configuration;
-    using Microsoft.Extensions.DependencyInjection;
-    using Microsoft.Extensions.Hosting;
+    using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 
     public class Startup
     {
@@ -46,7 +47,7 @@ namespace BoxingStore
 
             services.AddAutoMapper(typeof(Startup));
 
-            services.AddMemoryCache();
+            //services.AddMemoryCache();
 
             services.AddControllersWithViews(options =>
             {
@@ -59,6 +60,10 @@ namespace BoxingStore
             services.AddTransient<ICartService, CartService>();
             services.AddTransient<IUserService, UserService>();
 
+            services.AddSpaStaticFiles(configuration =>
+            {
+                configuration.RootPath = "ClientApp/build";
+            });
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -76,17 +81,33 @@ namespace BoxingStore
                 app.UseHsts();
             }
 
-            app
-                .UseHttpsRedirection()
-                .UseStaticFiles()
-                .UseRouting()
-                .UseAuthentication()
-                .UseAuthorization()
-                .UseEndpoints(endpoints =>
+            app.UseHttpsRedirection();
+            app.UseStaticFiles();
+            app.UseSpaStaticFiles();
+            app.UseRouting();
+            app.UseAuthentication();
+            app.UseAuthorization();
+
+            //.NET Core App
+            app.UseEndpoints(endpoints =>
+            {
+                //endpoints.MapDefaultAreaRoute();
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller}/{action=Index}/{id?}");
+                endpoints.MapRazorPages();
+            });
+
+            //React App
+            app.UseSpa(spa =>
+            {
+                spa.Options.SourcePath = "ClientApp";
+
+                if (env.IsDevelopment())
                 {
-                    endpoints.MapDefaultControllerRoute();
-                    endpoints.MapRazorPages();
-                });
+                    spa.UseReactDevelopmentServer(npmScript: "start");
+                }
+            });
         }
     }
 }
