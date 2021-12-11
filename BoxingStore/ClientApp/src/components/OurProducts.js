@@ -24,7 +24,7 @@ const OurProducts = ({ classes, ...props }) => {
                 {
                     props.productsList.map(product => {
                         return <ProductCard key={product.id} product={product} />
-                    })
+                    }).slice(0, 3)
                 }
             </div>
         </div>
