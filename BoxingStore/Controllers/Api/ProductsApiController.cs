@@ -4,8 +4,8 @@
     using BoxingStore.Services.Products;
     using Microsoft.AspNetCore.Mvc;
 
+    [Route("api/products2")]
     [ApiController]
-    [Route("api/products")]
     public class ProductsApiController : ControllerBase
     {
         private readonly IProductService products;
