@@ -31,12 +31,12 @@ const Shop = ({ ...props }) => {
                             <div className="col-md-12">
                                 <div className="product-filters">
                                     <ul id="brand-filter">
-                                        <li className="active" data-filter="*" >All</li>
-                                        <li data-filter=".venum"    >Venum</li>
-                                        <li data-filter=".everlast" >Everlast</li>
-                                        <li data-filter=".punch"    >Punch</li>
-                                        <li data-filter=".hayabusa" >Hayabusa</li>
-                                        <li data-filter=".grant"    >Grant</li>
+                                        <li className="active" data-filter="*" onClick={filterByBrand()}>All</li>
+                                        <li data-filter=".venum" onClick={filterByBrand()}>Venum</li>
+                                        <li data-filter=".everlast" onClick={filterByBrand()}>Everlast</li>
+                                        <li data-filter=".punch" onClick={filterByBrand()}>Punch</li>
+                                        <li data-filter=".hayabusa" onClick={filterByBrand()}>Hayabusa</li>
+                                        <li data-filter=".grant" onClick={filterByBrand()}>Grant</li>
                                     </ul>
                                 </div>
                             </div>
@@ -44,7 +44,7 @@ const Shop = ({ ...props }) => {
 
                         <div className="row">
                             {
-                                props.productsList.map(product => {
+                                props.productsList.filter(product => product.brand === filterByBrand()).map(product => {
                                     return <ProductCard key={product.id} product={product} />
                                 }).slice(0, 3)
                             }
@@ -92,10 +92,9 @@ function filterByBrand() {
 }
 
 const mapStateToProps = state => {
-    const { list, searchBrand } = state.searchSimple;
     return {
-        productsList: list.filter((item) => item.startsWith(searchText))
-    };
+        productsList: state.productsReducer.list
+    }
 }
 
 const mapActionToProps = {
