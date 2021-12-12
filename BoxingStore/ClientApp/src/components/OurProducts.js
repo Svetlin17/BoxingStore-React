@@ -27,6 +27,8 @@ const OurProducts = ({ ...props }) => {
                     }).slice(0, 3)
                 }
             </div>
+
+            <a href="shop" className="cart-btn btn-lg">View a product example</a>
         </div>
     );
 }

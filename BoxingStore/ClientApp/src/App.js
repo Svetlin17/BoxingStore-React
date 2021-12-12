@@ -39,6 +39,7 @@ export default class App extends Component {
                     <Switch>
                         <Route path="/" exact component={Home} />
                         <Route path="/shop" exact component={Shop} />
+                        <Route path="/shop/2" component={ProductDetails} />
                     </Switch>
 
                     <div className="logo-carousel-section">
