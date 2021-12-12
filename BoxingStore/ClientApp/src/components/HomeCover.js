@@ -7,10 +7,10 @@ export function HomeCover() {
                 <div className="col-lg-9 offset-lg-2 text-center">
                     <div className="hero-text">
                         <div className="hero-text-tablecell">
-                            <p className="subtitle">Fresh & Organic</p>
-                            <h1>Delicious Seasonal Fruits</h1>
+                            <p className="subtitle">Quality Equipment</p>
+                            <h1>Boxing Store</h1>
                             <div className="hero-btns">
-                                <a href="shop.html" className="boxed-btn">Fruit Collection</a>
+                                <a href="shop.html" className="boxed-btn">Products</a>
                                 <a href="contact.html" className="bordered-btn">Contact Us</a>
                             </div>
                         </div>

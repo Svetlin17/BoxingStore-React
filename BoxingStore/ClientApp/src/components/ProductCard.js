@@ -4,7 +4,7 @@ const ProductCard = ({
     product,
 }) => {
     return (
-        <div className="col-lg-4 col-md-6 text-center">
+        <div className={`col-lg-4 col-md-6 text-center ${product.brand.toLowerCase()}`}>
             <div className="single-product-item">
                 <div className="product-image">
                     <a href="single-product.html"><img src={product.imageUrl} alt="" /></a>

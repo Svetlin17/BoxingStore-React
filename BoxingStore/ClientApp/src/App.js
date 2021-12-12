@@ -1,24 +1,17 @@
 import React, { Component } from 'react';
+import { Route, Switch, Redirect } from 'react-router-dom';
+
 import { store } from './actions/store';
 import { Provider } from 'react-redux';
 
-import { Route } from 'react-router';
-import { Layout } from './components/Layout';
-import { Home } from './components/Home';
-import { FetchData } from './components/FetchData';
-import { Counter } from './components/Counter';
-import { Header } from './components/Header';
-import { Footer } from './components/Footer';
-import { Search } from './components/Search';
-import { HomeCover } from './components/HomeCover';
-import { Guarantees } from './components/Guarantees';
-import OurProducts from './components/OurProducts';
-import { DealOfTheMonth } from './components/DealOfTheMonth';
-import { Reviews } from './components/Reviews';
-import { VideoAd } from './components/VideoAd';
-import { DiscountBanner } from './components/DiscountBanner';
-import { Companies } from './components/Companies';
-import { Copyright } from './components/Copyright';
+import { Header } from './components/shared/Header';
+import { Footer } from './components/shared/Footer';
+import { Search } from './components/shared/Search';
+import { Companies } from './components/shared/Companies';
+import { Copyright } from './components/shared/Copyright';
+
+import { Home } from './components/home/Home';
+import Shop from './components/shop/Shop';
 
 /* import './custom.css' */
 
@@ -43,33 +36,10 @@ export default class App extends Component {
                         <Search />
                     </div>
 
-                    <div className="hero-area hero-bg">
-                        <HomeCover />
-                    </div>
-
-                    <div className="list-section pt-80 pb-80">
-                        <Guarantees />
-                    </div>
-
-                    <div className="product-section mt-150 mb-150">
-                        <OurProducts />
-                    </div>
-
-                    <section className="cart-banner pt-100 pb-100">
-                        <DealOfTheMonth />
-                    </section>
-
-                    <div className="testimonail-section mt-150 mb-150">
-                        <Reviews />
-                    </div>
-
-                    <div className="abt-section mb-150">
-                        <VideoAd />
-                    </div>
-
-                    <section className="shop-banner">
-                        <DiscountBanner />
-                    </section>
+                    <Switch>
+                        <Route path="/" exact component={Home} />
+                        <Route path="/shop" exact component={Shop} />
+                    </Switch>
 
                     <div className="logo-carousel-section">
                         <Companies />

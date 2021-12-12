@@ -14,12 +14,7 @@ export function Header() {
 
                         <nav className="main-menu">
                             <ul>
-                                <li className="current-list-item"><a href="#">Home</a>
-                                    <ul className="sub-menu">
-                                        <li><a href="index.html">Static Home</a></li>
-                                        <li><a href="index_2.html">Slider Home</a></li>
-                                    </ul>
-                                </li>
+                                <li className="current-list-item"><a href="/">Home</a></li>
                                 <li><a href="about.html">About</a></li>
                                 <li><a href="#">Pages</a>
                                     <ul className="sub-menu">
@@ -39,9 +34,9 @@ export function Header() {
                                     </ul>
                                 </li>
                                 <li><a href="contact.html">Contact</a></li>
-                                <li><a href="shop.html">Shop</a>
+                                <li><a href="shop">Shop</a>
                                     <ul className="sub-menu">
-                                        <li><a href="shop.html">Shop</a></li>
+                                        <li><a href="shop">Shop</a></li>
                                         <li><a href="checkout.html">Check Out</a></li>
                                         <li><a href="single-product.html">Single Product</a></li>
                                         <li><a href="cart.html">Cart</a></li>

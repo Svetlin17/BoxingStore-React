@@ -11,9 +11,9 @@ export function Reviews() {
                                 <img src="assets/img/avaters/avatar1.png" alt="" />
                             </div>
                             <div className="client-meta">
-                                <h3>Saira Hakim <span>Local shop owner</span></h3>
+                                <h3>Anthony Joshua <span>Famous Boxer</span></h3>
                                 <p className="testimonial-body">
-                                    " Sed ut perspiciatis unde omnis iste natus error veritatis et  quasi architecto beatae vitae dict eaque ipsa quae ab illo inventore Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium "
+                                    " I love this store "
 								</p>
                                 <div className="last-icon">
                                     <i className="fas fa-quote-right"></i>
