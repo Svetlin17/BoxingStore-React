@@ -1,8 +1,16 @@
-﻿import React from "react";
+﻿import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import { connect } from "react-redux";
+import * as actions from "../../actions/productsAction";
 
-const ProductDetails = ({
-    product,
-}) => {
+const ProductDetails = ({ ...props }) => {
+    const params = useParams();
+    const { id } = params;
+
+    useEffect(() => {
+        props.fetchProduct(id)
+    }, [])
+
     return (
         <>
             <div className="breadcrumb-section breadcrumb-bg">
@@ -23,20 +31,20 @@ const ProductDetails = ({
                     <div className="row">
                         <div className="col-md-5">
                             <div className="single-product-img">
-                                <img src={product.imageUrl} alt="" />
+                                <img src={props.currentProduct.imageUrl} alt="" />
                             </div>
                         </div>
                         <div className="col-md-7">
-                            <div className="single-product-content">
-                                <h3>{product.name}</h3>
-                                <p class="single-product-pricing"><span>{product.brand}</span> {product.price} $</p>
-                                <p>{product.description}</p>
+                            <div key={props.currentProduct.id} className="single-product-content">
+                                <h3>{props.currentProduct.name}</h3>
+                                <p className="single-product-pricing"><span>{props.currentProduct.brand}</span> {props.currentProduct.price} $</p>
+                                <p>{props.currentProduct.description}</p>
                                 <div className="single-product-form">
                                     <form action="index.html">
                                         <input type="number" placeholder="0" />
                                     </form>
                                     <a href="cart.html" className="cart-btn"><i className="fas fa-shopping-cart"></i> Add to Cart</a>
-                                    <p><strong>Categories: </strong>{product.categoryId}</p>
+                                    <p><strong>Categories: </strong>{props.currentProduct.categoryId}</p>
                                 </div>
                             </div>
                         </div>
@@ -47,4 +55,16 @@ const ProductDetails = ({
     );
 }
 
-export default ProductDetails;
+const mapStateToProps = state => {
+    return {
+        productsList: state.productsReducer.list,
+        currentProduct: state.productsReducer.singleProduct
+    }
+}
+
+const mapActionToProps = {
+    fetchAllProducts: actions.fetchAll,
+    fetchProduct: actions.fetchById
+}
+
+export default connect(mapStateToProps, mapActionToProps)(ProductDetails);

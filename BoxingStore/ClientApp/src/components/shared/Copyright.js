@@ -10,11 +10,11 @@ export function Copyright() {
                 <div className="col-lg-6 text-right col-md-12">
                     <div className="social-icons">
                         <ul>
-                            <li><a href="#" target="_blank"><i className="fab fa-facebook-f"></i></a></li>
-                            <li><a href="#" target="_blank"><i className="fab fa-twitter"></i></a></li>
-                            <li><a href="#" target="_blank"><i className="fab fa-instagram"></i></a></li>
-                            <li><a href="#" target="_blank"><i className="fab fa-linkedin"></i></a></li>
-                            <li><a href="#" target="_blank"><i className="fab fa-dribbble"></i></a></li>
+                            <li><a href="/" target="_blank"><i className="fab fa-facebook-f"></i></a></li>
+                            <li><a href="/" target="_blank"><i className="fab fa-twitter"></i></a></li>
+                            <li><a href="/" target="_blank"><i className="fab fa-instagram"></i></a></li>
+                            <li><a href="/" target="_blank"><i className="fab fa-linkedin"></i></a></li>
+                            <li><a href="/" target="_blank"><i className="fab fa-dribbble"></i></a></li>
                         </ul>
                     </div>
                 </div>

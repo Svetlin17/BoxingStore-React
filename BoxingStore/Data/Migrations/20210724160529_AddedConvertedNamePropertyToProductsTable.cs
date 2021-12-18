@@ -10,7 +10,7 @@
                 name: "ConvertedName",
                 table: "Products",
                 type: "nvarchar(max)",
-                nullable: false,
+                nullable: true,
                 defaultValue: "");
         }
 

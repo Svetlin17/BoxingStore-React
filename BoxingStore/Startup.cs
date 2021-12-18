@@ -49,10 +49,14 @@ namespace BoxingStore
 
             //services.AddMemoryCache();
 
+            services.AddControllersWithViews();
+
+            /*
             services.AddControllersWithViews(options =>
             {
                 options.Filters.Add<AutoValidateAntiforgeryTokenAttribute>();
             });
+            */
 
             services.AddTransient<IStatisticsService, StatisticsService>();
             services.AddTransient<IProductService, ProductService>();

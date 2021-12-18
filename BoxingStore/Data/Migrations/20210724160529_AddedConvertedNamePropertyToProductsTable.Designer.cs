@@ -52,7 +52,6 @@ namespace BoxingStore.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("ConvertedName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Description")

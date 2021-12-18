@@ -13,7 +13,6 @@
         [Required]
         public string Name { get; set; }
 
-        [Required]
         public string ConvertedName { get; set; }
 
         [Required]

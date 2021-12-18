@@ -28,7 +28,7 @@ const OurProducts = ({ ...props }) => {
                 }
             </div>
 
-            <a href="shop" className="cart-btn btn-lg">View a product example</a>
+            <a href="/shop" className="cart-btn btn-lg text-center">View shop</a>
         </div>
     );
 }

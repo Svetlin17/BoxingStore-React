@@ -11,7 +11,10 @@ import { Companies } from './components/shared/Companies';
 import { Copyright } from './components/shared/Copyright';
 
 import { Home } from './components/home/Home';
+import Cart from './components/Cart';
 import Shop from './components/shop/Shop';
+import ProductDetails from './components/shop/ProductDetails';
+import ProductForm from './components/shop/ProductForm';
 
 /* import './custom.css' */
 
@@ -39,7 +42,10 @@ export default class App extends Component {
                     <Switch>
                         <Route path="/" exact component={Home} />
                         <Route path="/shop" exact component={Shop} />
-                        <Route path="/shop/2" component={ProductDetails} />
+                        <Route path="/shop/:id" component={ProductDetails} />
+                        <Route path="/add-product" component={ProductForm} />
+                        <Route path="/edit-product/:id" component={ProductForm} />
+                        <Route path="/my-cart" component={Cart} />
                     </Switch>
 
                     <div className="logo-carousel-section">

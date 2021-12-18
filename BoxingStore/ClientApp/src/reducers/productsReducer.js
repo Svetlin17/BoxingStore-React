@@ -1,7 +1,8 @@
 ﻿import { ACTION_TYPES } from "../actions/productsAction";
 
 const initialState = {
-    list: []
+    list: [],
+    singleProduct: {}
 }
 
 export const productsReducer = (state = initialState, action) => {
@@ -10,6 +11,30 @@ export const productsReducer = (state = initialState, action) => {
             return {
                 ...state,
                 list: [...action.payload]
+            }
+
+        case ACTION_TYPES.FETCH_BY_ID:
+            return {
+                ...state,
+                singleProduct: { ...action.payload }
+            }
+
+        case ACTION_TYPES.CREATE:
+            return {
+                ...state,
+                list: [...state.list, action.payload]
+            }
+
+        case ACTION_TYPES.UPDATE:
+            return {
+                ...state,
+                list: state.list.map(x => x.id == action.payload.id ? action.payload : x)
+            }
+
+        case ACTION_TYPES.DELETE:
+            return {
+                ...state,
+                list: state.list.filter(x => x.id != action.payload)
             }
 
         default:

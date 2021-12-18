@@ -3,7 +3,7 @@
 const baseUrl = "https://localhost:5001/api/"
 
 export default {
-    products(url = baseUrl + 'products') {
+    products(url = baseUrl + 'products/') {
         return {
             fetchAll: () => axios.get(url),
             fetchById: id => axios.get(url + id),
