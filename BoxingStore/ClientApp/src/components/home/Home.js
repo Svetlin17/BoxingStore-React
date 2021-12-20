@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { HomeCover } from '../HomeCover';
+import { HomeCover } from './HomeCover';
 import { Guarantees } from '../Guarantees';
 import OurProducts from '../OurProducts';
 import { DealOfTheMonth } from '../DealOfTheMonth';
@@ -10,7 +10,7 @@ import { DiscountBanner } from '../DiscountBanner';
 
 export function Home() {
     return (
-        <div>
+        <>
             <div className="hero-area hero-bg">
                 <HomeCover />
             </div>
@@ -38,6 +38,6 @@ export function Home() {
             <section className="shop-banner">
                 <DiscountBanner />
             </section>
-        </div>
+        </>
     );
 }

@@ -1,6 +1,14 @@
-import React from "react";
+import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { connect } from "react-redux";
+import * as actions from "../../actions/usersAction";
 
-export function Header() {
+const Header = ({ ...props }) => {
+
+    useEffect(() => {
+        props.getUser()
+    }, [])
+
     return (
         <div className="container">
             <div className="row">
@@ -14,7 +22,7 @@ export function Header() {
 
                         <nav className="main-menu">
                             <ul>
-                                <li className="current-list-item"><a href="/">Home</a></li>
+                                <li className="current-list-item"><Link to="/">Home</Link></li>
                                 <li><a href="about.html">About</a></li>
                                 <li><a href="/">Pages</a>
                                     <ul className="sub-menu">
@@ -37,16 +45,26 @@ export function Header() {
                                 <li><a href="contact.html">Contact</a></li>
                                 <li><a href="/shop">Shop</a>
                                     <ul className="sub-menu">
-                                        <li><a href="/shop">Gloves</a></li>
-                                        <li><a href="/shop">Shorts</a></li>
-                                        <li><a href="/shop">Headgear</a></li>
-                                        <li><a href="/shop">Mouthguard</a></li>
-                                        <li><a href="/shop">Handwraps</a></li>
+                                        <li><Link to="/shop">Gloves</Link></li>
+                                        <li><Link to="/shop">Shorts</Link></li>
+                                        <li><Link to="/shop">Headgear</Link></li>
+                                        <li><Link to="/shop">Mouthguard</Link></li>
+                                        <li><Link to="/shop">Handwraps</Link></li>
                                     </ul>
                                 </li>
                                 <li>
                                     <div className="header-icons">
-                                        <a className="shopping-cart" href="cart.html"><i className="fas fa-shopping-cart"></i></a>
+                                        {props.currentUser.isLoggedIn ? (
+                                            <>
+                                                <Link onClick={props.logOut} to="/account/logout">Log Out</Link>
+                                                <Link className="shopping-cart" to="/my-cart"><i className="fas fa-shopping-cart"></i></Link>
+                                            </>
+                                        ) : (
+                                            <>
+                                                <Link to="/account/login">Log in</Link>
+                                                <Link to="/account/register">Register</Link>
+                                            </>
+                                        )}
                                         <a className="mobile-hide search-bar-icon" href="/"><i className="fas fa-search"></i></a>
                                     </div>
                                 </li>
@@ -60,3 +78,15 @@ export function Header() {
         </div>
     );
 }
+
+const mapStateToProps = state => {
+    return {
+        currentUser: state.usersReducer
+    }
+}
+
+const mapActionToProps = {
+    getUser: actions.getCurrentUser
+}
+
+export default connect(mapStateToProps, mapActionToProps)(Header);

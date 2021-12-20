@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from 'react-router-dom';
 import { connect } from "react-redux";
 import * as actions from "../actions/productsAction";
 import ProductCard from './ProductCard';
@@ -28,7 +29,9 @@ const OurProducts = ({ ...props }) => {
                 }
             </div>
 
-            <a href="/shop" className="cart-btn btn-lg text-center">View shop</a>
+            <div className="container text-center">
+                <Link to="/shop" className="cart-btn btn-lg">View more</Link>
+            </div>
         </div>
     );
 }
