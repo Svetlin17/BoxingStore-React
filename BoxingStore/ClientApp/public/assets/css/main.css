@@ -2268,7 +2268,7 @@ ul.social-link-team li a {
   border-radius: 3px;
   width: 100%;
   resize: none;
-}.contact-form-large {    width: 100% !important;}
+}.contact-form-full {    width: 100% !important;}.contact-form-one-third {    width: 33% !important;}
 
 .contact-form-wrap {
   background-color: #FBFBFB;

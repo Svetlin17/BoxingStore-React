@@ -10,6 +10,8 @@ using BoxingStore.Data.Models;
 using BoxingStore.Services.Products;
 using Microsoft.AspNetCore.Authorization;
 
+using static BoxingStore.Data.DataConstants;
+
 namespace BoxingStore.Controllers.Api
 {
     [Route("api/[controller]")]
@@ -80,7 +82,6 @@ namespace BoxingStore.Controllers.Api
         // POST: api/Products
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        [Authorize(Roles = WebConstants.AdministratorRoleName)]
         public async Task<ActionResult<Product>> PostProduct(ProductFormServiceModel product)
         {
             var productData = new Product
@@ -96,6 +97,8 @@ namespace BoxingStore.Controllers.Api
 
             _context.Products.Add(productData);
             await _context.SaveChangesAsync();
+
+            _products.AddQuantities(product, ProductQuantityMin, productData.Id);
 
             return CreatedAtAction("GetProduct", new { id = productData.Id }, productData);
         }

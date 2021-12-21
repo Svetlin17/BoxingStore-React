@@ -12,7 +12,10 @@ const initialFieldValues = {
     price: '',
     description: '',
     imageUrl: '',
-    categoryId: ''
+    categoryId: '',
+    quantityS: '',
+    quantityM: '',
+    quantityL: ''
 }
 
 const ProductForm = ({ ...props }) => {
@@ -72,13 +75,18 @@ const ProductForm = ({ ...props }) => {
                                                 value={values.name}
                                                 onChange={handleInputChange}
                                                 id="name" />
-                                            <input
-                                                type="text"
-                                                placeholder="Category"
+                                            <select
+                                                className="custom-select custom-select-alt"
                                                 name="categoryId"
                                                 value={values.category}
                                                 onChange={handleInputChange}
-                                                id="category" />
+                                                id="category">
+                                                <option value="1">Gloves</option>
+                                                <option value="2">Shorts</option>
+                                                <option value="3">Headgear</option>
+                                                <option value="4">Mouthguard</option>
+                                                <option value="5">Handwraps</option>
+                                            </select>
                                         </p>
                                         <p className="p-input-form">
                                             <input type="text"
@@ -108,10 +116,33 @@ const ProductForm = ({ ...props }) => {
                                             <input type="text"
                                                 placeholder="Image: https://image.url/picture.png"
                                                 name="imageUrl"
-                                                className="contact-form-large"
+                                                className="contact-form-full"
                                                 value={values.imageUrl}
                                                 onChange={handleInputChange}
                                                 id="imageUrl" />
+                                        </p>
+                                        <p className="p-input-form">
+                                            <input type="number"
+                                                placeholder="Quantity S"
+                                                name="quantityS"
+                                                className="contact-form-one-third"
+                                                value={values.quantityS}
+                                                onChange={handleInputChange}
+                                                id="quantityS" />
+                                            <input type="number"
+                                                placeholder="Quantity M"
+                                                name="quantityM"
+                                                className="contact-form-one-third"
+                                                value={values.quantityM}
+                                                onChange={handleInputChange}
+                                                id="quantityM" />
+                                            <input type="number"
+                                                placeholder="Quantity L"
+                                                name="quantityL"
+                                                className="contact-form-one-third"
+                                                value={values.quantityL}
+                                                onChange={handleInputChange}
+                                                id="quantityL" />
                                         </p>
                                         <p>
                                             <input

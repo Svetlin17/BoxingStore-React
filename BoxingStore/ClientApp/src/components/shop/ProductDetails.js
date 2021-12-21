@@ -2,10 +2,35 @@
 import { useParams } from 'react-router-dom';
 import { connect } from "react-redux";
 import * as actions from "../../actions/productsAction";
+import useForm from "../useForm";
+
+const initialFieldValues = {
+    size: '',
+    quantity: ''
+}
 
 const ProductDetails = ({ ...props }) => {
     const params = useParams();
     const { id } = params;
+
+    const {
+        values,
+        setValues,
+        handleInputChange,
+        resetForm
+    } = useForm(initialFieldValues)
+
+    const handleSubmit = e => {
+        e.preventDefault()
+
+        resetForm()
+        if (id === undefined) {
+            props.createProduct(values)
+        }
+        else {
+            props.updateProduct(id, values)
+        }
+    }
 
     useEffect(() => {
         props.fetchProduct(id)
@@ -40,10 +65,32 @@ const ProductDetails = ({ ...props }) => {
                                 <p className="single-product-pricing"><span>{props.currentProduct.brand}</span> {props.currentProduct.price} $</p>
                                 <p>{props.currentProduct.description}</p>
                                 <div className="single-product-form">
-                                    <form action="index.html">
-                                        <input type="number" placeholder="0" />
+                                    <form autoComplete="off" noValidate onSubmit={handleSubmit}>
+                                        <p>
+                                            <div>Size:</div>
+                                            <select
+                                                className="custom-select custom-select-alt2"
+                                                name="size"
+                                                value={values.size}
+                                                onChange={handleInputChange}
+                                                id="size">
+                                                <option>S</option>
+                                                <option>M</option>
+                                                <option>L</option>
+                                            </select>
+                                        </p>
+                                        <p>
+                                            <div>Quantity:</div>
+                                            <input
+                                                type="number"
+                                                placeholder="0"
+                                                name="quantity"
+                                                value={values.quantity}
+                                                onChange={handleInputChange}
+                                                id="quantity" />
+                                        </p>
                                     </form>
-                                    <a href="cart.html" className="cart-btn"><i className="fas fa-shopping-cart"></i> Add to Cart</a>
+                                    <a type="submit" className="cart-btn"><i className="fas fa-shopping-cart"></i> Add to Cart</a>
                                     <p><strong>Categories: </strong>{props.currentProduct.categoryId}</p>
                                 </div>
                             </div>
