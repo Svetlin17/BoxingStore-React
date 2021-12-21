@@ -194,12 +194,24 @@
                 .OrderBy(br => br)
                 .ToList();
 
-        public ICollection<ProductSizeQuantity> ProductSizeQuantity(int productId)
-            => this.data.ProductSizeQuantities.Where(p => p.ProductId == productId).ToList();
+        public ICollection<ProductSizeQuantityQueryModel> ProductSizeQuantity(int productId)
+            => this.data
+            .ProductSizeQuantities
+            .Where(p => p.ProductId == productId)
+            .Select(psq => new ProductSizeQuantityQueryModel
+            { 
+                Id = psq.Id,
+                ProductId = psq.ProductId,
+                Size = psq.Size,
+                Quantity = psq.Quantity
+            })
+            .ToList();
 
-        public void RemoveProductSizeQuantities(ProductSizeQuantity psq)
+        public void RemoveProductSizeQuantities(ProductSizeQuantityQueryModel psq)
         {
-            this.data.ProductSizeQuantities.Remove(psq);
+            var psqItem = this.data.ProductSizeQuantities.Find(psq.Id);
+
+            this.data.ProductSizeQuantities.Remove(psqItem);
         }
 
         public void AddQuantities(ProductFormServiceModel product, int ProductQuantityMin, int productId)

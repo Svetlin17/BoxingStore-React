@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using BoxingStore.Data;
 using BoxingStore.Data.Models;
+using BoxingStore.Services.Products;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BoxingStore.Controllers.Api
 {
@@ -15,10 +17,12 @@ namespace BoxingStore.Controllers.Api
     public class ProductsController : ControllerBase
     {
         private readonly BoxingStoreDbContext _context;
+        private readonly IProductService _products;
 
-        public ProductsController(BoxingStoreDbContext context)
+        public ProductsController(BoxingStoreDbContext context, IProductService products)
         {
             _context = context;
+            _products = products;
         }
 
         // GET: api/Products
@@ -76,12 +80,24 @@ namespace BoxingStore.Controllers.Api
         // POST: api/Products
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Product>> PostProduct(Product product)
+        [Authorize(Roles = WebConstants.AdministratorRoleName)]
+        public async Task<ActionResult<Product>> PostProduct(ProductFormServiceModel product)
         {
-            _context.Products.Add(product);
+            var productData = new Product
+            {
+                Brand = product.Brand,
+                Name = product.Name,
+                //ConvertedName = convertedName,
+                Price = product.Price,
+                Description = product.Description,
+                ImageUrl = product.ImageUrl,
+                CategoryId = product.CategoryId
+            };
+
+            _context.Products.Add(productData);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetProduct", new { id = product.Id }, product);
+            return CreatedAtAction("GetProduct", new { id = productData.Id }, productData);
         }
 
         // DELETE: api/Products/5

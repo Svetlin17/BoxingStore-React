@@ -56,6 +56,7 @@ const Header = ({ ...props }) => {
                                     <div className="header-icons">
                                         {props.currentUser.isLoggedIn ? (
                                             <>
+                                                <Link to="/account">My Account</Link>
                                                 <Link onClick={props.logOut} to="/account/logout">Log Out</Link>
                                                 <Link className="shopping-cart" to="/my-cart"><i className="fas fa-shopping-cart"></i></Link>
                                             </>

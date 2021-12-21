@@ -13,6 +13,7 @@
     using System.Linq;
 
     using static Data.DataConstants;
+    using BoxingStore.Models;
 
     public class ProductsController : Controller
     {
@@ -99,7 +100,7 @@
         {
             var product = this.products.FindById(id);
 
-            ICollection<ProductSizeQuantity> allSizesForCurrentProduct = this.products.ProductSizeQuantity(product.Id);
+            ICollection<ProductSizeQuantityQueryModel> allSizesForCurrentProduct = this.products.ProductSizeQuantity(product.Id);
 
             var productForm = this.mapper.Map<ProductFormServiceModel>(product);
 
@@ -156,7 +157,7 @@
         {
             var product = this.products.Find(id);
 
-            ICollection<ProductSizeQuantity> allSizesForCurrentProduct = this.products.ProductSizeQuantity(product.Id);
+            ICollection<ProductSizeQuantityQueryModel> allSizesForCurrentProduct = this.products.ProductSizeQuantity(product.Id);
 
             foreach (var psq in allSizesForCurrentProduct)
             {
@@ -174,7 +175,7 @@
 
             var productCategory = this.products.ProductCategory(product.CategoryName);
 
-            ICollection<ProductSizeQuantity> allSizesForCurrentProduct = this.products.ProductSizeQuantity(product.Id);
+            ICollection<ProductSizeQuantityQueryModel> allSizesForCurrentProduct = this.products.ProductSizeQuantity(product.Id);
 
             return View(new ProductDetailsServiceModel
             {
@@ -235,7 +236,7 @@
 
             var productCategory = this.products.ProductCategory(product.CategoryName);
 
-            ICollection<ProductSizeQuantity> allSizesForCurrentProduct = this.products.ProductSizeQuantity(product.Id);
+            ICollection<ProductSizeQuantityQueryModel> allSizesForCurrentProduct = this.products.ProductSizeQuantity(product.Id);
 
             return View(new ProductDetailsServiceModel
             {

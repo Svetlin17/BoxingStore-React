@@ -65,7 +65,7 @@
             {
                 var product = this.data.Products.Find(cartProduct.ProductId);
 
-                ICollection<ProductSizeQuantity> allSizesForCurrentProduct = this.products.ProductSizeQuantity(product.Id);
+                ICollection<ProductSizeQuantityQueryModel> allSizesForCurrentProduct = this.products.ProductSizeQuantity(product.Id);
 
                 cartProducts.Add(new CartProductsQueryModel
                 {

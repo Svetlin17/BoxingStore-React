@@ -1,7 +1,17 @@
-﻿import React from "react";
+﻿import React, { useState, useEffect, Suspense } from "react";
+import { connect } from "react-redux";
 import { Cover } from './shared/Cover';
+import * as actions from "../actions/cartProductsAction";
 
-const Cart = () => {
+const Cart = ({ ...props }) => {
+
+    useEffect(() => {
+        props.fetchUserCart(props.user.cartId)
+    }, [])
+
+    console.log(props.user.cartId);
+    console.log(props);
+
     return (
         <>
             <Cover subtitle="Boxing Store" title="Cart" />
@@ -18,35 +28,28 @@ const Cart = () => {
                                             <th className="product-image">Product Image</th>
                                             <th className="product-name">Name</th>
                                             <th className="product-price">Price</th>
+                                            <th className="product-size">Size</th>
                                             <th className="product-quantity">Quantity</th>
                                             <th className="product-total">Total</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr className="table-body-row">
-                                            <td className="product-remove"><a href="#"><i className="far fa-window-close"></i></a></td>
-                                            <td className="product-image"><img src="assets/img/products/product-img-1.jpg" alt="" /></td>
-                                            <td className="product-name">Strawberry</td>
-                                            <td className="product-price">$85</td>
-                                            <td className="product-quantity"><input type="number" placeholder="0" /></td>
-                                            <td className="product-total">1</td>
-                                        </tr>
-                                        <tr className="table-body-row">
-                                            <td className="product-remove"><a href="#"><i className="far fa-window-close"></i></a></td>
-                                            <td className="product-image"><img src="assets/img/products/product-img-2.jpg" alt="" /></td>
-                                            <td className="product-name">Berry</td>
-                                            <td className="product-price">$70</td>
-                                            <td className="product-quantity"><input type="number" placeholder="0" /></td>
-                                            <td className="product-total">1</td>
-                                        </tr>
-                                        <tr className="table-body-row">
-                                            <td className="product-remove"><a href="#"><i className="far fa-window-close"></i></a></td>
-                                            <td className="product-image"><img src="assets/img/products/product-img-3.jpg" alt="" /></td>
-                                            <td className="product-name">Lemon</td>
-                                            <td className="product-price">$35</td>
-                                            <td className="product-quantity"><input type="number" placeholder="0" /></td>
-                                            <td className="product-total">1</td>
-                                        </tr>
+                                        {
+                                            props.userCart.cartProducts &&
+                                            props.userCart.cartProducts.map(cp => {
+                                                return (
+                                                    <tr key={cp.id} className="table-body-row">
+                                                        <td className="product-remove"><a href="#"><i className="fas fa-times"></i></a></td>
+                                                        <td className="product-image"><img src={cp.productImageUrl} alt="" /></td>
+                                                        <td className="product-name">{cp.productName}</td>
+                                                        <td className="product-price">{cp.price}</td>
+                                                        <td className="product-size">{cp.size}</td>
+                                                        <td className="product-quantity"><input type="number" min="1" max={cp.sizeQuantities.find(q => q.size == cp.size).quantity} placeholder={cp.quantity} /></td>
+                                                        <td className="product-total">{cp.quantity * cp.price}</td>
+                                                    </tr>
+                                                );
+                                            })
+                                        }
                                     </tbody>
                                 </table>
                             </div>
@@ -64,31 +67,21 @@ const Cart = () => {
                                     <tbody>
                                         <tr className="total-data">
                                             <td><strong>Subtotal: </strong></td>
-                                            <td>$500</td>
+                                            <td>{props.userCart.totalPrice} $</td>
                                         </tr>
                                         <tr className="total-data">
                                             <td><strong>Shipping: </strong></td>
-                                            <td>$45</td>
+                                            <td>Free</td>
                                         </tr>
                                         <tr className="total-data">
                                             <td><strong>Total: </strong></td>
-                                            <td>$545</td>
+                                            <td><strong>{props.userCart.totalPrice} $</strong></td>
                                         </tr>
                                     </tbody>
                                 </table>
                                 <div className="cart-buttons">
                                     <a href="cart.html" className="boxed-btn">Update Cart</a>
                                     <a href="checkout.html" className="boxed-btn black">Check Out</a>
-                                </div>
-                            </div>
-
-                            <div className="coupon-section">
-                                <h3>Apply Coupon</h3>
-                                <div className="coupon-form-wrap">
-                                    <form action="index.html">
-                                        <p><input type="text" placeholder="Coupon" /></p>
-                                        <p><input type="submit" value="Apply" /></p>
-                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -99,4 +92,19 @@ const Cart = () => {
     );
 }
 
-export default Cart;
+const mapStateToProps = state => {
+    const { user } = state.usersReducer;
+    return {
+        user,
+        cartProductsList: state.cartProductsReducer.list,
+        userCart: state.cartProductsReducer.singleCart
+    }
+}
+
+const mapActionToProps = {
+    fetchAllCartProducts: actions.fetchAll,
+    fetchUserCart: actions.fetchById,
+    deleteCartProduct: actions.Delete
+}
+
+export default connect(mapStateToProps, mapActionToProps)(Cart);

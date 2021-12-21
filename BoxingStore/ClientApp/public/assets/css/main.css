@@ -2268,7 +2268,7 @@ ul.social-link-team li a {
   border-radius: 3px;
   width: 100%;
   resize: none;
-}
+}.contact-form-large {    width: 100% !important;}
 
 .contact-form-wrap {
   background-color: #FBFBFB;
@@ -2747,4 +2747,4 @@ table.order-details tbody td {
   display: table-cell;
   vertical-align: middle;
   width: 100%;
-}
+}.p-input-form {    display: flex;    justify-content: space-between;}

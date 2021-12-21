@@ -24,6 +24,6 @@
 
         public double ProductTotalPrice { get; set; }
 
-        public ICollection<ProductSizeQuantity> SizeQuantities { get; set; }
+        public ICollection<ProductSizeQuantityQueryModel> SizeQuantities { get; set; }
     }
 }

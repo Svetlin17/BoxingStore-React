@@ -45,9 +45,9 @@
 
         IEnumerable<string> BrandsSorting();
 
-        ICollection<ProductSizeQuantity> ProductSizeQuantity(int productId);
+        ICollection<ProductSizeQuantityQueryModel> ProductSizeQuantity(int productId);
 
-        void RemoveProductSizeQuantities(ProductSizeQuantity psq);
+        void RemoveProductSizeQuantities(ProductSizeQuantityQueryModel psq);
 
         void AddQuantities(ProductFormServiceModel product, int ProductQuantityMin, int productId);
 

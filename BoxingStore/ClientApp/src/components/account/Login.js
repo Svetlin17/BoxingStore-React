@@ -61,7 +61,6 @@ class Login extends Component {
             dispatch(login(this.state))
                 .then(() => {
                     history.push("/account");
-                    //window.location.reload();
                 })
                 .catch(() => {
                     this.setState({

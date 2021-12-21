@@ -2,6 +2,7 @@
 {
     using BoxingStore.Data.Models;
     using BoxingStore.Data.Models.Enums;
+    using BoxingStore.Models;
     using System.Collections.Generic;
 
     public class ProductSizeQuantityServiceModel
@@ -16,6 +17,6 @@
 
         public int Quantity { get; set; }
 
-        public ICollection<ProductSizeQuantity> SizeQuantities { get; set; }
+        public ICollection<ProductSizeQuantityQueryModel> SizeQuantities { get; set; }
     }
 }
