@@ -42,7 +42,7 @@ export const fetchById = (id) => dispatch => {
     });
 }
 
-export const create = (data, onSuccess) => dispatch => {
+export const create = (data) => dispatch => {
     api.cartProducts()
         .create(data)
         .then(
@@ -51,12 +51,11 @@ export const create = (data, onSuccess) => dispatch => {
                     type: ACTION_TYPES.CREATE,
                     payload: response.data
                 })
-                onSuccess()
             })
         .catch(err => console.log(err))
 }
 
-export const update = (id, data, onSuccess) => dispatch => {
+export const update = (id, data) => dispatch => {
     api.cartProducts()
         .update(id, data)
         .then(
@@ -65,12 +64,11 @@ export const update = (id, data, onSuccess) => dispatch => {
                     type: ACTION_TYPES.UPDATE,
                     payload: { id, ...data }
                 })
-                onSuccess()
             })
         .catch(err => console.log(err))
 }
 
-export const Delete = (id, onSuccess) => dispatch => {
+export const Delete = (id) => dispatch => {
     api.cartProducts()
         .delete(id)
         .then(
@@ -79,7 +77,6 @@ export const Delete = (id, onSuccess) => dispatch => {
                     type: ACTION_TYPES.DELETE,
                     payload: id
                 })
-                onSuccess()
             })
         .catch(err => console.log(err))
 }

@@ -11,6 +11,7 @@ using BoxingStore.Services.Products;
 using Microsoft.AspNetCore.Authorization;
 
 using static BoxingStore.Data.DataConstants;
+using BoxingStore.Models;
 
 namespace BoxingStore.Controllers.Api
 {
@@ -36,16 +37,35 @@ namespace BoxingStore.Controllers.Api
 
         // GET: api/Products/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Product>> GetProduct(int id)
+        public async Task<ActionResult<ProductDetailsServiceModel>> GetProduct(int id)
         {
-            var product = await _context.Products.FindAsync(id);
+            var productExists = await _context.Products.FindAsync(id);
 
-            if (product == null)
+            if (productExists == null)
             {
                 return NotFound();
             }
 
-            return product;
+            var product = _products.FindById(id);
+
+            var productCategory = _products.ProductCategory(product.CategoryName);
+
+            ICollection<ProductSizeQuantityQueryModel> allSizesForCurrentProduct = _products.ProductSizeQuantity(id);
+
+            var productData = new ProductDetailsServiceModel
+            {
+                Id = product.Id,
+                Brand = product.Brand,
+                Name = product.Name,
+                ImageUrl = product.ImageUrl,
+                Description = product.Description,
+                Price = product.Price,
+                CategoryId = productCategory.Id,
+                CategoryName = product.CategoryName,
+                SizeQuantities = allSizesForCurrentProduct
+            };
+
+            return productData;
         }
 
         // PUT: api/Products/5

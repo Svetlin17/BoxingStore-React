@@ -13,8 +13,6 @@ class Profile extends Component {
             return <Redirect to="/account/login" />;
         }
 
-        console.log(currentUser);
-
         return (
             <>
                 <Cover subtitle="Boxing Store" title="My Account" />

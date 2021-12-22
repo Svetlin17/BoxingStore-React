@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using BoxingStore.Data;
 using BoxingStore.Data.Models;
+using BoxingStore.Models.CartProducts;
+using BoxingStore.Data.Models.Enums;
 
 namespace BoxingStore.Controllers.Api
 {
@@ -45,17 +47,18 @@ namespace BoxingStore.Controllers.Api
         // PUT: api/CartProducts/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutCartProduct(int id, CartProduct cartProduct)
+        public async Task<IActionResult> ChangeQuantity(int id, CartProductChangeQuantityApiModel cpModel)
         {
-            if (id != cartProduct.Id)
+            var cartProduct = await _context.CartProducts.FindAsync(id);
+
+            if (cartProduct == null)
             {
                 return BadRequest();
             }
 
-            _context.Entry(cartProduct).State = EntityState.Modified;
-
             try
             {
+                cartProduct.Quantity = cpModel.Quantity;
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
@@ -76,8 +79,16 @@ namespace BoxingStore.Controllers.Api
         // POST: api/CartProducts
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<CartProduct>> PostCartProduct(CartProduct cartProduct)
+        public async Task<ActionResult<CartProduct>> PostCartProduct(CartProductApiModel cp)
         {
+            var cartProduct = new CartProduct
+            {
+                CartId = cp.CartId,
+                ProductId = cp.ProductId,
+                Quantity = cp.Quantity,
+                Size = (ProductSize)cp.Size
+            };
+
             _context.CartProducts.Add(cartProduct);
             await _context.SaveChangesAsync();
 

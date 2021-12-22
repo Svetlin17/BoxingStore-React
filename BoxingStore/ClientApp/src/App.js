@@ -9,6 +9,7 @@ import { Search } from './components/shared/Search';
 import { Companies } from './components/shared/Companies';
 import { Copyright } from './components/shared/Copyright';
 import { Home } from './components/home/Home';
+import { ErrorPage } from './components/shared/ErrorPage';
 import { Location } from './components/Location';
 import Header from './components/shared/Header';
 import Login from "./components/account/Login";
@@ -87,6 +88,7 @@ class App extends Component {
                         <Route path="/account/register" component={Register} />
                         <Route path="/account" component={Profile} />
                         <Route path="/location" component={Location} />
+                        <Route path="/404" component={ErrorPage} />
                     </Switch>
 
                     <div className="logo-carousel-section">
