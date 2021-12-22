@@ -6,6 +6,9 @@ export default {
     products(url = baseUrl + 'products/') {
         return {
             fetchAll: () => axios.get(url),
+            fetchAllProductsByBrand: () => axios.get(url),
+            fetchAllProductsByCategory: () => axios.get(url),
+            fetchAllProductsByBrandAndCategory: () => axios.get(url),
             fetchById: id => axios.get(url + id),
             create: newRecord => axios.post(url, newRecord),
             update: (id, updateRecord) => axios.put(url + id, updateRecord),

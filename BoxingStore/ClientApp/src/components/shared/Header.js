@@ -23,18 +23,7 @@ const Header = ({ ...props }) => {
                         <nav className="main-menu">
                             <ul>
                                 <li className="current-list-item"><Link to="/">Home</Link></li>
-                                <li><a href="about.html">About</a></li>
-                                <li><a href="/">Pages</a>
-                                    <ul className="sub-menu">
-                                        <li><a href="404.html">404 page</a></li>
-                                        <li><a href="about.html">About</a></li>
-                                        <li><a href="cart.html">Cart</a></li>
-                                        <li><a href="checkout.html">Check Out</a></li>
-                                        <li><a href="contact.html">Contact</a></li>
-                                        <li><a href="news.html">News</a></li>
-                                        <li><a href="shop.html">Shop</a></li>
-                                    </ul>
-                                </li>
+                                <li><Link to="/location">Location</Link></li>
                                 <li><a href="news.html">News</a>
                                     <ul className="sub-menu">
                                         <li><a href="news.html">News</a></li>
@@ -43,7 +32,7 @@ const Header = ({ ...props }) => {
                                     </ul>
                                 </li>
                                 <li><a href="contact.html">Contact</a></li>
-                                <li><a href="/shop">Shop</a>
+                                <li><Link to="/shop">Shop</Link>
                                     <ul className="sub-menu">
                                         <li><Link to="/shop">Gloves</Link></li>
                                         <li><Link to="/shop">Shorts</Link></li>

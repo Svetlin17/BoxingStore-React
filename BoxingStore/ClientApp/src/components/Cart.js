@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect } from "react";
+﻿import React, { useState, useEffect, useLayoutEffect } from "react";
 import { connect } from "react-redux";
 import { Link } from 'react-router-dom';
 import { Cover } from './shared/Cover';
@@ -24,18 +24,17 @@ const Cart = ({ ...props }) => {
         const { name, value } = event.target
         const newQuantity = { [name]: value }
 
-        props.updateCartProduct(cpId, newQuantity);
-
-        console.log(newQuantity)
-
         setValues(value)
-
-        props.fetchUserCart(props.user.cartId)
+        props.updateCartProduct(cpId, newQuantity);
     }
 
     useEffect(() => {
         props.fetchUserCart(props.user.cartId)
     }, [values, deleted])
+
+    useLayoutEffect(() => {
+        window.scrollTo(0, 0)
+    }, [props.location.pathname])
 
     return (
         <>
@@ -129,7 +128,7 @@ const Cart = ({ ...props }) => {
                                         </tbody>
                                     </table>
                                     <div className="cart-buttons">
-                                        <a href="checkout.html" className="boxed-btn black">Check Out</a>
+                                        <Link to="/checkout" className="boxed-btn black">Check Out</Link>
                                     </div>
                                 </div>
                             </div>

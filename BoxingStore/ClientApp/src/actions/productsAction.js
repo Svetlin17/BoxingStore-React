@@ -5,6 +5,9 @@ export const ACTION_TYPES = {
     UPDATE: 'UPDATE',
     DELETE: 'DELETE',
     FETCH_ALL: 'FETCH_ALL',
+    FETCH_BY_BRAND: 'FETCH_BY_BRAND',
+    FETCH_BY_CATEGORY: 'FETCH_BY_CATEGORY',
+    FETCH_BY_BRAND_CATEGORY: 'FETCH_BY_BRAND_CATEGORY',
     FETCH_BY_ID: 'FETCH_BY_ID'
 }
 
@@ -22,6 +25,56 @@ export const fetchAll = () => {
             .catch(err => console.log(err))
     }
 }
+
+export const fetchAllProductsByBrand = (brand) => {
+    return dispatch => {
+        api.products()
+            .fetchAllProductsByBrand()
+            .then(
+                response => {
+                    dispatch({
+                        type: ACTION_TYPES.FETCH_BY_BRAND,
+                        payload: response.data,
+                        brand: brand
+                    })
+                })
+            .catch(err => console.log(err))
+    }
+}
+
+export const fetchAllProductsByCategory = (category) => {
+    return dispatch => {
+        api.products()
+            .fetchAllProductsByCategory()
+            .then(
+                response => {
+                    dispatch({
+                        type: ACTION_TYPES.FETCH_BY_CATEGORY,
+                        payload: response.data,
+                        category: category
+                    })
+                })
+            .catch(err => console.log(err))
+    }
+}
+
+export const fetchAllProductsByBrandAndCategory = (brand, category) => {
+    return dispatch => {
+        api.products()
+            .fetchAllProductsByBrandAndCategory()
+            .then(
+                response => {
+                    dispatch({
+                        type: ACTION_TYPES.FETCH_BY_BRAND_CATEGORY,
+                        payload: response.data,
+                        brand: brand,
+                        category: category
+                    })
+                })
+            .catch(err => console.log(err))
+    }
+}
+
 
 export const fetchById = (id) => dispatch => {
     return new Promise((resolve, reject) => {

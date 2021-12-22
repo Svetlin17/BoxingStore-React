@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useLayoutEffect } from 'react';
 import { connect } from "react-redux";
 import { Route, Switch, Redirect, Link } from 'react-router-dom';
 import EventBus from "./common/EventBus";
@@ -21,6 +21,7 @@ import ProductDetails from './components/shop/ProductDetails';
 import ProductForm from './components/shop/ProductForm';
 
 import { ToastProvider } from "react-toast-notifications";
+import OrderForm from './components/orders/OrderForm';
 
 class App extends Component {
     static displayName = App.name;
@@ -89,6 +90,7 @@ class App extends Component {
                         <Route path="/account" component={Profile} />
                         <Route path="/location" component={Location} />
                         <Route path="/404" component={ErrorPage} />
+                        <Route path="/checkout" component={OrderForm} />
                     </Switch>
 
                     <div className="logo-carousel-section">

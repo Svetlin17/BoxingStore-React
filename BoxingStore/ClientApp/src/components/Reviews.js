@@ -25,9 +25,9 @@ export function Reviews() {
                                 <img src="assets/img/avaters/avatar2.png" alt="" />
                             </div>
                             <div className="client-meta">
-                                <h3>David Niph <span>Local shop owner</span></h3>
+                                <h3>Mike Tyson <span>Boxing Legend</span></h3>
                                 <p className="testimonial-body">
-                                    " Sed ut perspiciatis unde omnis iste natus error veritatis et  quasi architecto beatae vitae dict eaque ipsa quae ab illo inventore Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium "
+                                    " I strongly recommend this store. <br /> 5/5 stars from me "
 								</p>
                                 <div className="last-icon">
                                     <i className="fas fa-quote-right"></i>
@@ -39,9 +39,9 @@ export function Reviews() {
                                 <img src="assets/img/avaters/avatar3.png" alt="" />
                             </div>
                             <div className="client-meta">
-                                <h3>Jacob Sikim <span>Local shop owner</span></h3>
+                                <h3>Canelo Alvarez <span>Boxing Champion</span></h3>
                                 <p className="testimonial-body">
-                                    " Sed ut perspiciatis unde omnis iste natus error veritatis et  quasi architecto beatae vitae dict eaque ipsa quae ab illo inventore Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium "
+                                    " Shop from here to be a champion like me. <br /> Quien entiende, se detiene aqui "
 								</p>
                                 <div className="last-icon">
                                     <i className="fas fa-quote-right"></i>

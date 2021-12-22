@@ -1,13 +1,44 @@
-﻿import React, { useState, useEffect } from "react";
+﻿import React, { useState, useEffect, useLayoutEffect } from "react";
 import { connect } from "react-redux";
 import * as actions from "../../actions/productsAction";
 import ProductCard from '../ProductCard';
 
 const Shop = ({ ...props }) => {
+    const [brand, setBrand] = useState()
+    const [category, setCategory] = useState()
+
+    const onChangeBrand = (b) => {
+        setBrand(b)
+    }
+
+    const onChangeCategory = (c) => {
+        setCategory(c)
+    }
 
     useEffect(() => {
-        props.fetchAllProducts()
-    }, [])
+        if (brand !== "" && brand !== undefined && category !== "" && category !== undefined) {
+            if (props.productsList !== undefined) {
+                
+            }
+            props.fetchAllProductsByBrandAndCategory(brand, category)
+        }
+        else if (category !== "" && category !== undefined) {
+            console.log("tuka sum")
+            console.log(category)
+            props.fetchAllProductsByCategory(category)
+            console.log(props.productsList)
+        }
+        else if (brand !== "" && brand !== undefined) {
+            props.fetchAllProductsByBrand(brand)
+        }
+        else {
+            props.fetchAllProducts()
+        }
+    }, [brand, category])
+
+    useLayoutEffect(() => {
+        window.scrollTo(0, 0)
+    }, [props.location.pathname])
 
     return (
         <>
@@ -31,12 +62,12 @@ const Shop = ({ ...props }) => {
                             <div className="col-md-12">
                                 <div className="product-filters">
                                     <ul id="brand-filter">
-                                        <li className="active" data-filter="*">All</li>
-                                        <li data-filter=".venum">Venum</li>
-                                        <li data-filter=".everlast">Everlast</li>
-                                        <li data-filter=".punch">Punch</li>
-                                        <li data-filter=".hayabusa">Hayabusa</li>
-                                        <li data-filter=".grant">Grant</li>
+                                        <li onClick={() => onChangeBrand("")} className="active">All</li>
+                                        <li onClick={() => onChangeBrand("Venum")}>Venum</li>
+                                        <li onClick={() => onChangeBrand("Everlast")}>Everlast</li>
+                                        <li onClick={() => onChangeBrand("SZ Fighters")}>SZ Fighters</li>
+                                        <li onClick={() => onChangeBrand("Hayabusa")}>Hayabusa</li>
+                                        <li onClick={() => onChangeBrand("Leone")}>Leone</li>
                                     </ul>
                                 </div>
                             </div>
@@ -77,7 +108,10 @@ const mapStateToProps = state => {
 }
 
 const mapActionToProps = {
-    fetchAllProducts: actions.fetchAll
+    fetchAllProducts: actions.fetchAll,
+    fetchAllProductsByBrand: actions.fetchAllProductsByBrand,
+    fetchAllProductsByCategory: actions.fetchAllProductsByCategory,
+    fetchAllProductsByBrandAndCategory: actions.fetchAllProductsByBrandAndCategory
 }
 
 export default connect(mapStateToProps, mapActionToProps)(Shop);

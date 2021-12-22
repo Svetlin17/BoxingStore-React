@@ -1,8 +1,13 @@
-﻿import React from "react";
+﻿import React, { useLayoutEffect } from "react";
 import { Link } from 'react-router-dom';
 import { Cover } from './Cover';
 
-export function ErrorPage() {
+export function ErrorPage({ ...props }) {
+
+    useLayoutEffect(() => {
+        window.scrollTo(0, 0)
+    }, [props.location.pathname])
+
     return (
         <>
             <Cover subtitle="Boxing Store" title="404 - Not Found" />

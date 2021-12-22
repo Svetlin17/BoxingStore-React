@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useLayoutEffect } from 'react';
 
 import { HomeCover } from './HomeCover';
 import { Guarantees } from '../Guarantees';
@@ -8,7 +8,12 @@ import { Reviews } from '../Reviews';
 import { VideoAd } from '../VideoAd';
 import { DiscountBanner } from '../DiscountBanner';
 
-export function Home() {
+export function Home({ ...props }) {
+
+    useLayoutEffect(() => {
+        window.scrollTo(0, 0)
+    }, [props.location.pathname])
+
     return (
         <>
             <div className="hero-area hero-bg">

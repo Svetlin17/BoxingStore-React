@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect } from 'react';
+﻿import React, { useEffect, useLayoutEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { connect } from "react-redux";
 import { useToasts } from "react-toast-notifications";
@@ -38,6 +38,10 @@ const ProductDetails = ({ ...props }) => {
     useEffect(() => {
         props.fetchProduct(id)
     }, [])
+
+    useLayoutEffect(() => {
+        window.scrollTo(0, 0)
+    }, [props.location.pathname])
 
     return (
         <>

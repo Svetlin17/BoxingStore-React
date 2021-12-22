@@ -19,6 +19,25 @@ export const productsReducer = (state = initialState, action) => {
                 singleProduct: { ...action.payload }
             }
 
+        case ACTION_TYPES.FETCH_BY_BRAND:
+            console.log(action.brand)
+            return {
+                ...state,
+                list: [...action.payload.filter(x => x.brand == action.brand)]
+            }
+
+        case ACTION_TYPES.FETCH_BY_CATEGORY:
+            return {
+                ...state,
+                list: [...action.payload.filter(p => p.categoryId == action.category)]
+            }
+
+        case ACTION_TYPES.FETCH_BY_BRAND_CATEGORY:
+            return {
+                ...state,
+                list: [...action.payload.filter(p => p.category == action.categoryId && p.brand == action.brand)]
+            }
+
         case ACTION_TYPES.CREATE:
             return {
                 ...state,
