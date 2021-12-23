@@ -40,7 +40,7 @@ const Header = ({ ...props }) => {
                                                 <Link to="/account">My Account</Link>
                                                 {props.currentUser.user.isAdmin == false &&
                                                     <>
-                                                        <Link to="/orders">My Orders</Link>
+                                                        <Link to="/order">My Orders</Link>
                                                         <Link className="shopping-cart" to="/my-cart"><i className="fas fa-shopping-cart"></i></Link>
                                                     </>
                                                 }

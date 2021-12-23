@@ -36,6 +36,7 @@ const ProductForm = ({ ...props }) => {
 
         resetForm()
         if (id === undefined) {
+            console.log(values)
             props.createProduct(values)
             history.push("/shop");
         }
@@ -61,9 +62,6 @@ const ProductForm = ({ ...props }) => {
                 quantityM: props.currentProduct.sizeQuantities ? props.currentProduct.sizeQuantities.find(sq => sq.size == 1).quantity : 0,
                 quantityL: props.currentProduct.sizeQuantities ? props.currentProduct.sizeQuantities.find(sq => sq.size == 2).quantity : 0
             })
-            console.log(props.currentProduct)
-            console.log("needs more testing")
-            console.log(props)
         }
     }, [props.currentProduct.name])
 
@@ -93,6 +91,7 @@ const ProductForm = ({ ...props }) => {
                                                 value={values.categoryId}
                                                 onChange={handleInputChange}
                                                 id="categoryId">
+                                                <option value="" disabled>Category</option>
                                                 <option value="1">Gloves</option>
                                                 <option value="2">Shorts</option>
                                                 <option value="3">Headgear</option>

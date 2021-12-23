@@ -4,9 +4,9 @@ import { Link } from 'react-router-dom';
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
-
+import * as actions from "../../actions/ordersAction";
 import { connect } from "react-redux";
-import { login } from "../../actions/usersAction";
+import { getCurrentUser, login } from "../../actions/usersAction";
 
 import { Cover } from '../shared/Cover';
 
@@ -26,39 +26,40 @@ class OrderForm extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
         this.onChangeName = this.onChangeName.bind(this);
         this.onChangeEmail = this.onChangeEmail.bind(this);
-        this.onChangePhone = this.onChangeName.bind(this);
-        this.onChangeAddress = this.onChangeEmail.bind(this);
+        this.onChangePhone = this.onChangePhone.bind(this);
+        this.onChangeAddress = this.onChangeAddress.bind(this);
 
         this.state = {
-            name: "",
-            email: "",
-            phone: "",
-            address: "",
+            clientName: "",
+            clientEmail: "",
+            clientPhoneNumber: "",
+            clientAddress: "",
             loading: false,
+            userId: props.user.id
         };
     }
 
     onChangeName(e) {
         this.setState({
-            name: e.target.value,
+            clientName: e.target.value,
         });
     }
 
     onChangeEmail(e) {
         this.setState({
-            email: e.target.value,
+            clientEmail: e.target.value,
         });
     }
 
     onChangePhone(e) {
         this.setState({
-            phone: e.target.value,
+            clientPhoneNumber: e.target.value,
         });
     }
 
     onChangeAddress(e) {
         this.setState({
-            address: e.target.value,
+            clientAddress: e.target.value,
         });
     }
 
@@ -73,12 +74,14 @@ class OrderForm extends Component {
 
         const { dispatch, history } = this.props;
 
-        props.createProduct(values)
-        history.push("/shop");
+        this.props.createOrder(this.state)
+        history.push("/order");
     }
 
     render() {
-        const { isLoggedIn, message } = this.props;
+        const { isLoggedIn, message, user } = this.props;
+
+        console.log(this.props.user.id)
 
         if (!isLoggedIn) {
             return <Redirect to="/account/login" />;
@@ -175,7 +178,9 @@ class OrderForm extends Component {
 function mapStateToProps(state) {
     const { isLoggedIn } = state.usersReducer;
     const { message } = state.usersReducer;
+    const { user } = state.usersReducer;
     return {
+        user,
         isLoggedIn,
         message
     };
