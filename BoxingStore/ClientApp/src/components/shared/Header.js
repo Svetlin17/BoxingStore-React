@@ -22,32 +22,29 @@ const Header = ({ ...props }) => {
 
                         <nav className="main-menu">
                             <ul>
-                                <li className="current-list-item"><Link to="/">Home</Link></li>
+                                <li><Link to="/">Home</Link></li>
                                 <li><Link to="/location">Location</Link></li>
-                                <li><a href="news.html">News</a>
-                                    <ul className="sub-menu">
-                                        <li><a href="news.html">News</a></li>
-                                        <li><a href="single-news.html">Single News</a></li>
-                                        <li><a href="checkout.html">Check Out</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="contact.html">Contact</a></li>
-                                <li><Link to="/shop">Shop</Link>
-                                    <ul className="sub-menu">
-                                        <li><Link to="/shop">Gloves</Link></li>
-                                        <li><Link to="/shop">Shorts</Link></li>
-                                        <li><Link to="/shop">Headgear</Link></li>
-                                        <li><Link to="/shop">Mouthguard</Link></li>
-                                        <li><Link to="/shop">Handwraps</Link></li>
-                                    </ul>
-                                </li>
+                                <li><Link to="/shop">Shop</Link></li>
+                                {
+                                    props.currentUser.isLoggedIn &&
+                                    props.currentUser.user.isAdmin &&
+                                    <>
+                                        <li className="current-list-item"><Link to="/add-product">Add Product</Link></li>
+                                        <li className="current-list-item"><Link to="/order">Orders</Link></li>
+                                    </>
+                                }
                                 <li>
                                     <div className="header-icons">
                                         {props.currentUser.isLoggedIn ? (
                                             <>
                                                 <Link to="/account">My Account</Link>
+                                                {props.currentUser.user.isAdmin == false &&
+                                                    <>
+                                                        <Link to="/orders">My Orders</Link>
+                                                        <Link className="shopping-cart" to="/my-cart"><i className="fas fa-shopping-cart"></i></Link>
+                                                    </>
+                                                }
                                                 <Link onClick={props.logOut} to="/account/logout">Log Out</Link>
-                                                <Link className="shopping-cart" to="/my-cart"><i className="fas fa-shopping-cart"></i></Link>
                                             </>
                                         ) : (
                                             <>

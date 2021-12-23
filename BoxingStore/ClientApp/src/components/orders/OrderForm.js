@@ -73,21 +73,8 @@ class OrderForm extends Component {
 
         const { dispatch, history } = this.props;
 
-        if (this.checkBtn.context._errors.length === 0) {
-            dispatch(login(this.state))
-                .then(() => {
-                    history.push("/account");
-                })
-                .catch(() => {
-                    this.setState({
-                        loading: false
-                    });
-                });
-        } else {
-            this.setState({
-                loading: false,
-            });
-        }
+        props.createProduct(values)
+        history.push("/shop");
     }
 
     render() {
@@ -194,4 +181,8 @@ function mapStateToProps(state) {
     };
 }
 
-export default connect(mapStateToProps)(OrderForm);
+const mapActionToProps = {
+    createOrder: actions.create //ordersactions
+}
+
+export default connect(mapStateToProps, mapActionToProps)(OrderForm);

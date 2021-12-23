@@ -32,6 +32,35 @@
   margin-bottom: 80px;
 }
 
+.product-filters-alt {
+    ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        text-align: center;
+
+        li {
+            display: inline-block;
+            font-weight: 700;
+            font-size: 18px;
+            margin: 15px;
+            border: 2px solid $text-color;
+            color: #323232;
+            cursor: pointer;
+            padding: 8px 20px;
+            border-radius: 25px;
+
+            &.active {
+                border: 2px solid $primary-color;
+                background-color: $primary-color;
+                color: #fff;
+            }
+        }
+    }
+
+    margin-bottom: 80px;
+}
+
 .single-product-item {
   margin-bottom: 30px;
 }

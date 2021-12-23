@@ -2,11 +2,11 @@
 import { connect } from "react-redux";
 import * as actions from "../../actions/productsAction";
 import ProductCard from '../ProductCard';
+import { Cover } from '../shared/Cover';
 
 const Shop = ({ ...props }) => {
     const [brand, setBrand] = useState()
     const [category, setCategory] = useState()
-
     const onChangeBrand = (b) => {
         setBrand(b)
     }
@@ -16,17 +16,13 @@ const Shop = ({ ...props }) => {
     }
 
     useEffect(() => {
+        console.log(brand + " " + category)
         if (brand !== "" && brand !== undefined && category !== "" && category !== undefined) {
-            if (props.productsList !== undefined) {
-                
-            }
+            console.log("zarqzvam")
             props.fetchAllProductsByBrandAndCategory(brand, category)
         }
         else if (category !== "" && category !== undefined) {
-            console.log("tuka sum")
-            console.log(category)
             props.fetchAllProductsByCategory(category)
-            console.log(props.productsList)
         }
         else if (brand !== "" && brand !== undefined) {
             props.fetchAllProductsByBrand(brand)
@@ -42,27 +38,26 @@ const Shop = ({ ...props }) => {
 
     return (
         <>
-            <div className="breadcrumb-section breadcrumb-bg">
-                <div className="container">
-                    <div className="row">
-                        <div className="col-lg-8 offset-lg-2 text-center">
-                            <div className="breadcrumb-text">
-                                <p>Fresh and Organic</p>
-                                <h1>Shop</h1>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <Cover title="Shop" subtitle="Boxing Store" />
 
             <div className="product-section mt-150 mb-150">
                 <div className="container">
                     <div className="container">
                         <div className="row">
                             <div className="col-md-12">
+                                <div className="product-filters-alt">
+                                    <ul id="category-filter">
+                                        <li onClick={() => onChangeCategory("")} className="active">All Categories</li>
+                                        <li onClick={() => onChangeCategory(1)}>Gloves</li>
+                                        <li onClick={() => onChangeCategory(2)}>Shorts</li>
+                                        <li onClick={() => onChangeCategory(3)}>Headgear</li>
+                                        <li onClick={() => onChangeCategory(4)}>Mouthguard</li>
+                                        <li onClick={() => onChangeCategory(5)}>Handwraps</li>
+                                    </ul>
+                                </div>
                                 <div className="product-filters">
                                     <ul id="brand-filter">
-                                        <li onClick={() => onChangeBrand("")} className="active">All</li>
+                                        <li onClick={() => onChangeBrand("")} className="active">All Brands</li>
                                         <li onClick={() => onChangeBrand("Venum")}>Venum</li>
                                         <li onClick={() => onChangeBrand("Everlast")}>Everlast</li>
                                         <li onClick={() => onChangeBrand("SZ Fighters")}>SZ Fighters</li>

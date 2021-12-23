@@ -1,11 +1,12 @@
-﻿import { ACTION_TYPES } from "../actions/productsAction";
+﻿import { ACTION_TYPES } from "../actions/cartProductsAction";
 
 const initialState = {
     list: [],
-    singleProduct: {}
+    singleProduct: {},
+    singleOrder: {}
 }
 
-export const productsReducer = (state = initialState, action) => {
+export const ordersReducer = (state = initialState, action) => {
     switch (action.type) {
         case ACTION_TYPES.FETCH_ALL:
             return {
@@ -16,26 +17,7 @@ export const productsReducer = (state = initialState, action) => {
         case ACTION_TYPES.FETCH_BY_ID:
             return {
                 ...state,
-                singleProduct: { ...action.payload }
-            }
-
-        case ACTION_TYPES.FETCH_BY_BRAND:
-            console.log(action.brand)
-            return {
-                ...state,
-                list: [...action.payload.filter(x => x.brand == action.brand)]
-            }
-
-        case ACTION_TYPES.FETCH_BY_CATEGORY:
-            return {
-                ...state,
-                list: [...action.payload.filter(p => p.categoryId == action.category)]
-            }
-
-        case ACTION_TYPES.FETCH_BY_BRAND_CATEGORY:
-            return {
-                ...state,
-                list: [...action.payload.filter(p => p.categoryId == action.category && p.brand == action.brand)]
+                singleOrder: { ...action.payload }
             }
 
         case ACTION_TYPES.CREATE:

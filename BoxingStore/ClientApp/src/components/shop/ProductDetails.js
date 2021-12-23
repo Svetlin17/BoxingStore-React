@@ -1,5 +1,5 @@
 ﻿import React, { useEffect, useLayoutEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { connect } from "react-redux";
 import { useToasts } from "react-toast-notifications";
 import * as actions from "../../actions/productsAction";
@@ -35,6 +35,12 @@ const ProductDetails = ({ ...props }) => {
         }
     }
 
+    const onDelete = id => {
+        if (window.confirm('Delete the product?')) {
+            addToast("Successfully removed.", { appearance: 'success', placement: 'bottom-right' })
+        }
+    }
+
     useEffect(() => {
         props.fetchProduct(id)
     }, [])
@@ -42,6 +48,8 @@ const ProductDetails = ({ ...props }) => {
     useLayoutEffect(() => {
         window.scrollTo(0, 0)
     }, [props.location.pathname])
+
+    console.log(props.user)
 
     return (
         <>
@@ -92,7 +100,18 @@ const ProductDetails = ({ ...props }) => {
                                     </div>
                                 }
                                 <p>{props.currentProduct.description}</p>
+
                                 {
+                                    props.user.isAdmin &&
+                                    <div className="cart-buttons">
+                                        <Link to={"/edit-product/" + props.currentProduct.id} className="boxed-btn">Edit</Link>
+                                        <a className="boxed-btn black">Delete</a>
+                                    </div>
+                                }
+
+
+                                {
+                                    props.user.isAdmin == false &&
                                     props.currentProduct.sizeQuantities &&
                                     (props.currentProduct.sizeQuantities.find(q => q.size == 0).quantity > 0 ||
                                      props.currentProduct.sizeQuantities.find(q => q.size == 1).quantity > 0 ||
@@ -147,7 +166,7 @@ const ProductDetails = ({ ...props }) => {
                                             </p>
                                             <p>
                                                 <input
-                                                    className="cart-btn"
+                                                    className="cart-btn text-white"
                                                     type="submit"
                                                     value="Add to Cart" />
                                             </p>

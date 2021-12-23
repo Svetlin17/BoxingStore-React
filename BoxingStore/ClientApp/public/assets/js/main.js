@@ -98,6 +98,19 @@
             });
             
         });
+
+        $(".product-filters-alt li").on('click', function () {
+            
+            $(".product-filters-alt li").removeClass("active");
+            $(this).addClass("active");
+
+            var selector = $(this).attr('data-filter');
+
+            $(".product-lists").isotope({
+                filter: selector,
+            });
+            
+        });
         
         // isotop inner
         $(".product-lists").isotope();

@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import { Route, Switch, Redirect, Link } from 'react-router-dom';
 import EventBus from "./common/EventBus";
 import { logout } from "./actions/usersAction";
-
 import { Footer } from './components/shared/Footer';
 import { Search } from './components/shared/Search';
 import { Companies } from './components/shared/Companies';
@@ -16,6 +15,7 @@ import Login from "./components/account/Login";
 import Profile from "./components/account/Profile";
 import Register from "./components/account/Register";
 import Cart from './components/Cart';
+import Orders from './components/orders/Orders';
 import Shop from './components/shop/Shop';
 import ProductDetails from './components/shop/ProductDetails';
 import ProductForm from './components/shop/ProductForm';
@@ -53,6 +53,7 @@ class App extends Component {
         EventBus.remove("logout");
     }
 
+
     logOut() {
         this.props.dispatch(logout());
         this.setState({
@@ -71,7 +72,7 @@ class App extends Component {
                     </div>
 
                     <div className="top-header-area" id="sticker">
-                        <Header logOut={this.logOut}/>
+                        <Header logOut={this.logOut} />
                     </div>
 
                     <div className="search-area">
@@ -91,6 +92,7 @@ class App extends Component {
                         <Route path="/location" component={Location} />
                         <Route path="/404" component={ErrorPage} />
                         <Route path="/checkout" component={OrderForm} />
+                        <Route path="/order" component={Orders} />
                     </Switch>
 
                     <div className="logo-carousel-section">

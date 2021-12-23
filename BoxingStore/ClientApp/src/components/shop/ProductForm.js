@@ -23,7 +23,7 @@ const ProductForm = ({ ...props }) => {
     const { id } = params;
 
     const history = useHistory();
-
+    console.log(props)
     const {
         values,
         setValues,
@@ -40,6 +40,8 @@ const ProductForm = ({ ...props }) => {
             history.push("/shop");
         }
         else {
+            values.id = id;
+            console.log(values)
             props.updateProduct(id, values)
             history.push("/shop/" + id);
         }
@@ -47,18 +49,28 @@ const ProductForm = ({ ...props }) => {
 
     useEffect(() => {
         if (id !== undefined) {
+            props.fetchProduct(id);
             setValues({
-                ...props.fetchProduct(id)
+                name: props.currentProduct.name,
+                brand: props.currentProduct.brand,
+                price: props.currentProduct.price,
+                description: props.currentProduct.description,
+                imageUrl: props.currentProduct.imageUrl,
+                categoryId: props.currentProduct.categoryId,
+                quantityS: props.currentProduct.sizeQuantities ? props.currentProduct.sizeQuantities.find(sq => sq.size == 0).quantity : 0,
+                quantityM: props.currentProduct.sizeQuantities ? props.currentProduct.sizeQuantities.find(sq => sq.size == 1).quantity : 0,
+                quantityL: props.currentProduct.sizeQuantities ? props.currentProduct.sizeQuantities.find(sq => sq.size == 2).quantity : 0
             })
             console.log(props.currentProduct)
             console.log("needs more testing")
+            console.log(props)
         }
-    }, [id])
+    }, [props.currentProduct.name])
 
     return (
         <>
-            <Cover subtitle="Boxing Store" title="Add/Edit Product" />
-            <div>{props.currentProduct.name}</div>
+            <Cover subtitle="Boxing Store" title={props.location.pathname == "/add-product" ? "Add Product" : "Edit Product"} />
+
             <div className="contact-from-section mt-150 mb-150">
                 <div className="container">
                     <div className="row">
@@ -78,9 +90,9 @@ const ProductForm = ({ ...props }) => {
                                             <select
                                                 className="custom-select custom-select-alt"
                                                 name="categoryId"
-                                                value={values.category}
+                                                value={values.categoryId}
                                                 onChange={handleInputChange}
-                                                id="category">
+                                                id="categoryId">
                                                 <option value="1">Gloves</option>
                                                 <option value="2">Shorts</option>
                                                 <option value="3">Headgear</option>

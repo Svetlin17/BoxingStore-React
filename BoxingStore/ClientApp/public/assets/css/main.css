@@ -2392,7 +2392,7 @@ ul.social-link-team li a {
   border: 2px solid #cc1d1d;
   background-color: #cc1d1d;
   color: #fff;
-}
+}.product-filters-alt {    margin-bottom: 10px;}    .product-filters-alt ul {        margin: 0;        padding: 0;        list-style: none;        text-align: center;    }        .product-filters-alt ul li {            display: inline-block;            font-weight: 700;            font-size: 18px;            margin: 15px;            border: 2px solid #051922;            color: #323232;            cursor: pointer;            padding: 8px 20px;            border-radius: 25px;        }            .product-filters-alt ul li.active {                border: 2px solid #cc1d1d;                background-color: #cc1d1d;                color: #fff;            }
 
 .single-product-item {
   margin-bottom: 30px;

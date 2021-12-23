@@ -7,6 +7,8 @@
 
     public class OrderFormServiceModel
     {
+        public string UserId { get; set; }
+
         [Display(Name = "Order Date")]
         public DateTime? OrderDate { get; set; }
 
