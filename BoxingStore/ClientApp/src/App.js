@@ -1,8 +1,12 @@
 import React, { Component, useLayoutEffect } from 'react';
 import { connect } from "react-redux";
 import { Route, Switch, Redirect, Link } from 'react-router-dom';
+import AdminRoute from './components/common/AdminRoute';
+import PrivateRoute from './components/common/PrivateRoute';
 import EventBus from "./common/EventBus";
+
 import { logout } from "./actions/usersAction";
+
 import { Footer } from './components/shared/Footer';
 import { Search } from './components/shared/Search';
 import { Companies } from './components/shared/Companies';
@@ -83,16 +87,17 @@ class App extends Component {
                         <Route path="/" exact component={Home} />
                         <Route path="/shop" exact component={Shop} />
                         <Route path="/shop/:id" component={ProductDetails} />
-                        <Route path="/add-product" component={ProductForm} />
-                        <Route path="/edit-product/:id" component={ProductForm} />
-                        <Route path="/my-cart" component={Cart} />
+                        <AdminRoute path="/add-product" component={ProductForm} />
+                        <AdminRoute path="/edit-product/:id" component={ProductForm} />
+                        <PrivateRoute exact path="/my-cart" component={<Cart />} />
                         <Route path="/account/login" component={Login} />
                         <Route path="/account/register" component={Register} />
-                        <Route path="/account" component={Profile} />
+                        <PrivateRoute path="/account" component={Profile} />
                         <Route path="/location" component={Location} />
+                        <PrivateRoute path="/checkout" component={OrderForm} />
+                        <PrivateRoute path="/order" component={Orders} />
                         <Route path="/404" component={ErrorPage} />
-                        <Route path="/checkout" component={OrderForm} />
-                        <Route path="/order" component={Orders} />
+                        <Redirect from='*' to='/404' />
                     </Switch>
 
                     <div className="logo-carousel-section">

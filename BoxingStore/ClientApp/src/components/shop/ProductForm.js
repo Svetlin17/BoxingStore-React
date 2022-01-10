@@ -2,7 +2,7 @@
 import { useParams, useHistory } from 'react-router-dom';
 import { connect } from "react-redux";
 import * as actions from "../../actions/productsAction";
-import useForm from "../useForm";
+import useForm from "../common/useForm";
 
 import { Cover } from '../shared/Cover';
 

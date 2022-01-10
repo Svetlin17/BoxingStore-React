@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { useToasts } from "react-toast-notifications";
 import * as actions from "../../actions/productsAction";
 import * as cartProductActions from "../../actions/cartProductsAction";
-import useForm from "../useForm";
+import useForm from "../common/useForm";
 
 const initialFieldValues = {
     size: '',

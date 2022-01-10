@@ -18,7 +18,6 @@ const Shop = ({ ...props }) => {
     useEffect(() => {
         console.log(brand + " " + category)
         if (brand !== "" && brand !== undefined && category !== "" && category !== undefined) {
-            console.log("zarqzvam")
             props.fetchAllProductsByBrandAndCategory(brand, category)
         }
         else if (category !== "" && category !== undefined) {
