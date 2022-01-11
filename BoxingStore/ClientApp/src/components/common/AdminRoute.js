@@ -4,7 +4,7 @@ import { Redirect } from 'react-router-dom';
 
 const AdminRoute = ({ component, ...props }) => {
     if (props.currentUser.isLoggedIn) {
-        return props.currentUser.user.userName === "admin@bxng.com" ? component : <Redirect to="/" />
+        return props.currentUser.user.isAdmin ? component : <Redirect to="/" />
     }
     else {
         return <Redirect to="/login" />

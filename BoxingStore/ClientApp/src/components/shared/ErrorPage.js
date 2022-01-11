@@ -4,10 +4,6 @@ import { Cover } from './Cover';
 
 export function ErrorPage({ ...props }) {
 
-    useLayoutEffect(() => {
-        window.scrollTo(0, 0)
-    }, [props.location.pathname])
-
     return (
         <>
             <Cover subtitle="Boxing Store" title="404 - Not Found" />

@@ -65,9 +65,11 @@ const ProductForm = ({ ...props }) => {
         }
     }, [props.currentProduct.name])
 
+    console.log(id)
+
     return (
         <>
-            <Cover subtitle="Boxing Store" title={props.location.pathname == "/add-product" ? "Add Product" : "Edit Product"} />
+            <Cover subtitle="Boxing Store" title={true ? "Add Product" : "Edit Product"} />
 
             <div className="contact-from-section mt-150 mb-150">
                 <div className="container">

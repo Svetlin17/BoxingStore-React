@@ -39,7 +39,7 @@ namespace BoxingStore.Controllers.Api
 
         // GET: api/Orders/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Order>> GetOrder(int id)
+        public async Task<ActionResult<Order>> CompleteOrder(int id)
         {
             var order = await _context.Orders.FindAsync(id);
 
@@ -47,6 +47,8 @@ namespace BoxingStore.Controllers.Api
             {
                 return NotFound();
             }
+            
+            this.orders.CompleateOrder(id);
 
             return order;
         }

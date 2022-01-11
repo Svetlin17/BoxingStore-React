@@ -31,9 +31,7 @@ const Shop = ({ ...props }) => {
         }
     }, [brand, category])
 
-    useLayoutEffect(() => {
-        window.scrollTo(0, 0)
-    }, [props.location.pathname])
+    console.log(props)
 
     return (
         <>

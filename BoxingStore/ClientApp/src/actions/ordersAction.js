@@ -5,7 +5,8 @@ export const ACTION_TYPES = {
     UPDATE: 'UPDATE',
     DELETE: 'DELETE',
     FETCH_ALL: 'FETCH_ALL',
-    FETCH_BY_ID: 'FETCH_BY_ID'
+    FETCH_BY_ID: 'FETCH_BY_ID',
+    COMPLETE: 'COMPLETE'
 }
 
 export const fetchAll = () => {
@@ -23,7 +24,7 @@ export const fetchAll = () => {
     }
 }
 
-export const fetchById = (id) => dispatch => {
+export const complete = (id) => dispatch => {
     return new Promise((resolve, reject) => {
         api.orders()
             .fetchById(id)

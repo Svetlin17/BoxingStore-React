@@ -1,4 +1,4 @@
-﻿import { ACTION_TYPES } from "../actions/cartProductsAction";
+﻿import { ACTION_TYPES } from "../actions/ordersAction";
 
 const initialState = {
     list: [],
@@ -14,7 +14,7 @@ export const ordersReducer = (state = initialState, action) => {
                 list: [...action.payload]
             }
 
-        case ACTION_TYPES.FETCH_BY_ID:
+        case ACTION_TYPES.COMPLETE:
             return {
                 ...state,
                 singleOrder: { ...action.payload }

@@ -45,11 +45,7 @@ const ProductDetails = ({ ...props }) => {
         props.fetchProduct(id)
     }, [])
 
-    useLayoutEffect(() => {
-        window.scrollTo(0, 0)
-    }, [props.location.pathname])
-
-    console.log(props.user)
+    console.log(props)
 
     return (
         <>

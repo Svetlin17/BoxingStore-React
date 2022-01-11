@@ -3,31 +3,35 @@ import { connect } from "react-redux";
 import { Link } from 'react-router-dom';
 import { Cover } from '../shared/Cover';
 import { useToasts } from "react-toast-notifications";
-import * as cartsActions from "../../actions/cartProductsAction";
 import * as ordersActions from "../../actions/ordersAction";
 
 const Orders = ({ ...props }) => {
     const { addToast } = useToasts()
     const [values, setValues] = useState(0)
+    const [completed, setCompleted] = useState(0)
     const [deleted, setDeleted] = useState(0)
 
+    const onComplete = id => {
+        if (window.confirm('Complete the order?')) {
+            props.completeOrder(id)
+            addToast("Successfully completed.", { appearance: 'success', placement: 'bottom-right' })
+        }
+        setCompleted(completed + 1);
+    }
+
     const onDelete = id => {
-        if (window.confirm('Remove the product from your cart?')) {
-            props.deleteCartProduct(id)
-            addToast("Successfully removed.", { appearance: 'success', placement: 'bottom-right' })
+        if (window.confirm('Delete the order?')) {
+            props.deleteOrder(id)
+            addToast("Successfully deleted.", { appearance: 'error', placement: 'bottom-right' })
         }
         setDeleted(deleted + 1);
     }
 
     useEffect(() => {
         props.fetchAllOrders()
-    }, [])
+    }, [completed, deleted])
 
-    useLayoutEffect(() => {
-        window.scrollTo(0, 0)
-    }, [props.location.pathname])
-
-    console.log(props.ordersList)
+    console.log(props)
 
     return (
         <>
@@ -62,7 +66,11 @@ const Orders = ({ ...props }) => {
                                 <table className="cart-table">
                                     <thead className="cart-table-head">
                                         <tr className="table-head-row">
-                                            <th className="product-remove">Complete</th>
+                                            {
+                                                props.user &&
+                                                props.user.isAdmin &&
+                                                <th className="product-remove">Complete</th>
+                                            }
                                             <th className="product-price">Total Price</th>
                                             <th className="product-name">Client Name</th>
                                             <th className="product-image">Client Mail</th>
@@ -73,20 +81,37 @@ const Orders = ({ ...props }) => {
                                     </thead>
                                     <tbody>
                                         {
-                                            props.ordersList &&
-                                            props.ordersList.map(o => {
-                                                return (
-                                                    <tr key={o.id} className="table-body-row">
-                                                        <td className="product-remove" ><a onClick={() => onDelete(o.id)}><i className="fas fa-times"></i></a></td>
-                                                        <td className="product-image">{o.totalPrice} $</td>
-                                                        <td className="product-name">{o.clientName}</td>
-                                                        <td className="product-size">{o.clientEmail}</td>
-                                                        <td className="product-quantity">{o.clientPhoneNumber}</td>
-                                                        <td className="product-total">{o.clientAddress}</td>
-                                                        <td className="product-price">{o.isCompleated}</td>
-                                                    </tr>
-                                                );
-                                            })
+                                            props.user &&
+                                            props.user.isAdmin ? (
+                                                props.ordersList &&
+                                                props.ordersList.map(o => {
+                                                    return (
+                                                        <tr key={o.id} className="table-body-row">
+                                                            <td className="product-remove" ><a onClick={() => o.isCompleated ? onDelete(o.id) : onComplete(o.id)}><i className="fas fa-times"></i></a></td>
+                                                            <td className="product-image">{o.totalPrice} $</td>
+                                                            <td className="product-name">{o.clientName}</td>
+                                                            <td className="product-size">{o.clientEmail}</td>
+                                                            <td className="product-quantity">{o.clientPhoneNumber}</td>
+                                                            <td className="product-total">{o.clientAddress}</td>
+                                                            <td className={o.isCompleated ? "text-success product-price" : "text-danger product-price" }>{o.isCompleated ? "Completed" : "Active"}</td>
+                                                        </tr>
+                                                    );
+                                                })
+                                            ) : (
+                                                props.ordersList &&
+                                                props.ordersList.filter(o => o.userId === props.user.id).map(o => {
+                                                    return (
+                                                        <tr key={o.id} className="table-body-row">
+                                                            <td className="product-image">{o.totalPrice} $</td>
+                                                            <td className="product-name">{o.clientName}</td>
+                                                            <td className="product-size">{o.clientEmail}</td>
+                                                            <td className="product-quantity">{o.clientPhoneNumber}</td>
+                                                            <td className="product-total">{o.clientAddress}</td>
+                                                            <td className={o.isCompleated ? "text-success product-price" : "text-danger product-price"}>{o.isCompleated ? "Completed" : "Active"}</td>
+                                                        </tr>
+                                                    );
+                                                })
+                                            )
                                         }
                                     </tbody>
                                 </table>
@@ -109,12 +134,9 @@ const mapStateToProps = state => {
 }
 
 const mapActionToProps = {
-    fetchAllCartProducts: cartsActions.fetchAll,
-    fetchUserCart: cartsActions.fetchById,
-    deleteCartProduct: cartsActions.Delete,
-    updateCartProduct: cartsActions.update,
-
-    fetchAllOrders: ordersActions.fetchAll
+    fetchAllOrders: ordersActions.fetchAll,
+    completeOrder: ordersActions.complete,
+    deleteOrder: ordersActions.Delete,
 }
 
 export default connect(mapStateToProps, mapActionToProps)(Orders);

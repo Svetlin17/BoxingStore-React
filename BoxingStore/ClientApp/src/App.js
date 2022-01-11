@@ -87,15 +87,15 @@ class App extends Component {
                         <Route path="/" exact component={Home} />
                         <Route path="/shop" exact component={Shop} />
                         <Route path="/shop/:id" component={ProductDetails} />
-                        <AdminRoute path="/add-product" component={ProductForm} />
-                        <AdminRoute path="/edit-product/:id" component={ProductForm} />
-                        <PrivateRoute exact path="/my-cart" component={<Cart />} />
+                        <AdminRoute path="/add-product" component={<ProductForm />} />
+                        <AdminRoute path="/edit-product/:id" component={<ProductForm />} />
+                        <PrivateRoute exact path="/my-cart" component={<Cart props={this.props} />} />
                         <Route path="/account/login" component={Login} />
                         <Route path="/account/register" component={Register} />
-                        <PrivateRoute path="/account" component={Profile} />
+                        <PrivateRoute path="/account" component={<Profile />} />
                         <Route path="/location" component={Location} />
-                        <PrivateRoute path="/checkout" component={OrderForm} />
-                        <PrivateRoute path="/order" component={Orders} />
+                        <PrivateRoute path="/checkout" component={<OrderForm />} />
+                        <PrivateRoute path="/order" component={<Orders />} />
                         <Route path="/404" component={ErrorPage} />
                         <Redirect from='*' to='/404' />
                     </Switch>

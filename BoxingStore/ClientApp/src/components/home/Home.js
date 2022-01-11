@@ -10,10 +10,6 @@ import { DiscountBanner } from '../DiscountBanner';
 
 export function Home({ ...props }) {
 
-    useLayoutEffect(() => {
-        window.scrollTo(0, 0)
-    }, [props.location.pathname])
-
     return (
         <>
             <div className="hero-area hero-bg">
