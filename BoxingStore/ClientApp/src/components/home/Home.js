@@ -1,14 +1,18 @@
 import React, { useLayoutEffect } from 'react';
-
+import { useLocation } from 'react-router-dom';
 import { HomeCover } from './HomeCover';
 import { Guarantees } from '../Guarantees';
 import OurProducts from '../OurProducts';
 import { DealOfTheMonth } from '../DealOfTheMonth';
 import { Reviews } from '../Reviews';
 import { VideoAd } from '../VideoAd';
-import { DiscountBanner } from '../DiscountBanner';
 
 export function Home({ ...props }) {
+    const location = useLocation();
+
+    useLayoutEffect(() => {
+        window.scrollTo(0, 0)
+    }, [location.pathname])
 
     return (
         <>
@@ -35,10 +39,6 @@ export function Home({ ...props }) {
             <div className="abt-section mb-150">
                 <VideoAd />
             </div>
-
-            <section className="shop-banner">
-                <DiscountBanner />
-            </section>
         </>
     );
 }

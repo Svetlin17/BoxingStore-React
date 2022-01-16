@@ -32,10 +32,6 @@ const Cart = ({ ...props }) => {
         props.fetchUserCart(props.user.cartId)
     }, [values, deleted])
 
-    useLayoutEffect(() => {
-        window.scrollTo(0, 0)
-    }, [props.location.pathname])
-
     return (
         <>
             <Cover subtitle="Boxing Store" title="Cart" />

@@ -19,11 +19,11 @@ export function DealOfTheMonth() {
                     </div>
 
                     <div className="content-column col-lg-6">
-                        <h3><span className="orange-text">Deal</span> of the month</h3>
-                        <h4>Hikan Strwaberry</h4>
-                        <div className="text">Quisquam minus maiores repudiandae nobis, minima saepe id, fugit ullam similique! Beatae, minima quisquam molestias facere ea. Perspiciatis unde omnis iste natus error sit voluptatem accusant</div>
+                        <h3><span className="orange-text">Coming Soon By </span>Venum</h3>
+                        <h4>Venum Contact Shin Guards - Black/Red</h4>
+                        <div className="text">The Venum Contact Shin Guards have been engineered to flex and form naturally with the motion of your shin and your instep in order to provide the ultimate anatomical protection.</div>
 
-                        <div className="time-counter"><div className="time-countdown clearfix" data-countdown="2022/01/01"><div className="counter-column"><div className="inner"><span className="count">00</span>Days</div></div> <div className="counter-column"><div className="inner"><span className="count">00</span>Hours</div></div>  <div className="counter-column"><div className="inner"><span className="count">00</span>Mins</div></div>  <div className="counter-column"><div className="inner"><span className="count">00</span>Secs</div></div></div></div>
+                        <div className="time-counter"><div className="time-countdown clearfix" data-countdown="2022/02/01"><div className="counter-column"><div className="inner"><span className="count">00</span>Days</div></div> <div className="counter-column"><div className="inner"><span className="count">00</span>Hours</div></div>  <div className="counter-column"><div className="inner"><span className="count">00</span>Mins</div></div>  <div className="counter-column"><div className="inner"><span className="count">00</span>Secs</div></div></div></div>
                     </div>
                 </div>
             </div>

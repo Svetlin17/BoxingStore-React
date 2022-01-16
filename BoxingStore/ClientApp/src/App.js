@@ -1,6 +1,6 @@
 import React, { Component, useLayoutEffect } from 'react';
 import { connect } from "react-redux";
-import { Route, Switch, Redirect, Link } from 'react-router-dom';
+import { Route, Switch, Redirect, Link, useLocation } from 'react-router-dom';
 import AdminRoute from './components/common/AdminRoute';
 import PrivateRoute from './components/common/PrivateRoute';
 import EventBus from "./common/EventBus";
@@ -88,7 +88,7 @@ class App extends Component {
                         <Route path="/shop" exact component={Shop} />
                         <Route path="/shop/:id" component={ProductDetails} />
                         <AdminRoute path="/add-product" component={<ProductForm />} />
-                        <AdminRoute path="/edit-product/:id" component={<ProductForm />} />
+                        <AdminRoute path="/edit-product/:id" component={<ProductForm props={this.props} />} />
                         <PrivateRoute exact path="/my-cart" component={<Cart props={this.props} />} />
                         <Route path="/account/login" component={Login} />
                         <Route path="/account/register" component={Register} />

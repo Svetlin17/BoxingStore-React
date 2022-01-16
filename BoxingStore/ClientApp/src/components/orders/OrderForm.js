@@ -1,5 +1,5 @@
 ﻿import React, { Component } from "react";
-import { Redirect } from 'react-router-dom';
+import { BrowserRouter, Redirect } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
@@ -7,7 +7,7 @@ import CheckButton from "react-validation/build/button";
 import * as actions from "../../actions/ordersAction";
 import { connect } from "react-redux";
 import { getCurrentUser, login } from "../../actions/usersAction";
-
+import { withRouter } from 'react-router-dom';
 import { Cover } from '../shared/Cover';
 
 const required = (value) => {
@@ -75,7 +75,8 @@ class OrderForm extends Component {
         const { dispatch, history } = this.props;
 
         this.props.createOrder(this.state)
-        history.push("/order");
+
+        //this.props.history.push("/order");
     }
 
     render() {

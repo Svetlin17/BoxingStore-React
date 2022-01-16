@@ -128,9 +128,17 @@ namespace BoxingStore.Controllers.Api
         public async Task<IActionResult> DeleteProduct(int id)
         {
             var product = await _context.Products.FindAsync(id);
+
             if (product == null)
             {
                 return NotFound();
+            }
+
+            ICollection<ProductSizeQuantityQueryModel> allSizesForCurrentProduct = _products.ProductSizeQuantity(product.Id);
+
+            foreach (var psq in allSizesForCurrentProduct)
+            {
+                _products.RemoveProductSizeQuantities(psq);
             }
 
             _context.Products.Remove(product);

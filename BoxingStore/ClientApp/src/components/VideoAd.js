@@ -15,7 +15,6 @@ export function VideoAd() {
                         <h2>Viking By <span className="orange-text">Venum</span></h2>
                         <p>We are delighted to present to you our Viking Collection.</p>
                         <p>They will fear your wrath!</p>
-                        <a href="about.html" className="boxed-btn mt-4">know more</a>
                     </div>
                 </div>
             </div>

@@ -1,5 +1,5 @@
 ﻿import React, { useEffect, useLayoutEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useHistory, useLocation } from 'react-router-dom';
 import { connect } from "react-redux";
 import { useToasts } from "react-toast-notifications";
 import * as actions from "../../actions/productsAction";
@@ -15,6 +15,8 @@ const ProductDetails = ({ ...props }) => {
     const params = useParams();
     const { id } = params;
     const { addToast } = useToasts();
+    const history = useHistory();
+    const location = useLocation();
 
     const {
         values,
@@ -35,9 +37,11 @@ const ProductDetails = ({ ...props }) => {
         }
     }
 
-    const onDelete = id => {
+    const onDeleteProduct = () => {
         if (window.confirm('Delete the product?')) {
-            addToast("Successfully removed.", { appearance: 'success', placement: 'bottom-right' })
+            props.deleteProduct(id);
+            addToast("Successfully removed.", { appearance: 'error', placement: 'bottom-right' });
+            history.push("/shop");
         }
     }
 
@@ -45,7 +49,9 @@ const ProductDetails = ({ ...props }) => {
         props.fetchProduct(id)
     }, [])
 
-    console.log(props)
+    useLayoutEffect(() => {
+        window.scrollTo(0, 0)
+    }, [location.pathname])
 
     return (
         <>
@@ -74,6 +80,7 @@ const ProductDetails = ({ ...props }) => {
                             <div key={props.currentProduct.id} className="single-product-content">
                                 <h3>{props.currentProduct.name}</h3>
                                 <p className="single-product-pricing"><span>{props.currentProduct.brand}</span> {props.currentProduct.price} $</p>
+                                <p>{props.currentProduct.description}</p>
                                 {
                                     props.currentProduct.sizeQuantities &&
                                     props.currentProduct.sizeQuantities.find(q => q.size == 0).quantity === 0 &&
@@ -86,8 +93,7 @@ const ProductDetails = ({ ...props }) => {
                                                     <div className="col-lg-8 offset-lg-2 text-center">
                                                         <div className="error-text">
                                                             <i className="far fa-sad-cry"></i>
-                                                            <h1>Out of stock!</h1>
-                                                            <p>We're sorry but this item is out of stock.</p>
+                                                            <h1 className="orange-text">Out of stock!</h1>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -95,13 +101,12 @@ const ProductDetails = ({ ...props }) => {
                                         </div>
                                     </div>
                                 }
-                                <p>{props.currentProduct.description}</p>
 
                                 {
                                     props.user.isAdmin &&
                                     <div className="cart-buttons">
                                         <Link to={"/edit-product/" + props.currentProduct.id} className="boxed-btn">Edit</Link>
-                                        <a className="boxed-btn black">Delete</a>
+                                        <a className="boxed-btn black" onClick={onDeleteProduct}>Delete</a>
                                     </div>
                                 }
 
@@ -190,6 +195,7 @@ const mapStateToProps = state => {
 const mapActionToProps = {
     fetchAllProducts: actions.fetchAll,
     fetchProduct: actions.fetchById,
+    deleteProduct: actions.Delete,
     addProductToCart: cartProductActions.create,
     updateProductInCart: cartProductActions.update
 }

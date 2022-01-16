@@ -1,4 +1,5 @@
 ﻿import React, { useState, useEffect, useLayoutEffect } from "react";
+import { useLocation } from 'react-router-dom';
 import { connect } from "react-redux";
 import * as actions from "../../actions/productsAction";
 import ProductCard from '../ProductCard';
@@ -7,6 +8,8 @@ import { Cover } from '../shared/Cover';
 const Shop = ({ ...props }) => {
     const [brand, setBrand] = useState()
     const [category, setCategory] = useState()
+    const location = useLocation();
+
     const onChangeBrand = (b) => {
         setBrand(b)
     }
@@ -31,7 +34,9 @@ const Shop = ({ ...props }) => {
         }
     }, [brand, category])
 
-    console.log(props)
+    useLayoutEffect(() => {
+        window.scrollTo(0, 0)
+    }, [location.pathname])
 
     return (
         <>
@@ -54,12 +59,12 @@ const Shop = ({ ...props }) => {
                                 </div>
                                 <div className="product-filters">
                                     <ul id="brand-filter">
-                                        <li onClick={() => onChangeBrand("")} className="active">All Brands</li>
-                                        <li onClick={() => onChangeBrand("Venum")}>Venum</li>
-                                        <li onClick={() => onChangeBrand("Everlast")}>Everlast</li>
-                                        <li onClick={() => onChangeBrand("SZ Fighters")}>SZ Fighters</li>
-                                        <li onClick={() => onChangeBrand("Hayabusa")}>Hayabusa</li>
-                                        <li onClick={() => onChangeBrand("Leone")}>Leone</li>
+                                        <li data-filter="*" onClick={() => onChangeBrand("")} className="active">All Brands</li>
+                                        <li data-filter="venum" onClick={() => onChangeBrand("Venum")}>Venum</li>
+                                        <li data-filter="everlast" onClick={() => onChangeBrand("Everlast")}>Everlast</li>
+                                        <li data-filter="sz fighters" onClick={() => onChangeBrand("SZ Fighters")}>SZ Fighters</li>
+                                        <li data-filter="hayabusa" onClick={() => onChangeBrand("Hayabusa")}>Hayabusa</li>
+                                        <li data-filter="leone" onClick={() => onChangeBrand("Leone")}>Leone</li>
                                     </ul>
                                 </div>
                             </div>
@@ -67,7 +72,7 @@ const Shop = ({ ...props }) => {
 
                         <div className="row">
                             {
-                                props.productsList.map(product => {
+                                props.productsList.reverse().map(product => {
                                     return <ProductCard key={product.id} product={product} />
                                 })
                             }

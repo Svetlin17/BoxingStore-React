@@ -1,5 +1,5 @@
-﻿import React, { useState, useEffect } from "react";
-import { useParams, useHistory } from 'react-router-dom';
+﻿import React, { useState, useEffect, useLayoutEffect } from "react";
+import { useParams, useHistory, useLocation } from 'react-router-dom';
 import { connect } from "react-redux";
 import * as actions from "../../actions/productsAction";
 import useForm from "../common/useForm";
@@ -19,11 +19,10 @@ const initialFieldValues = {
 }
 
 const ProductForm = ({ ...props }) => {
-    const params = useParams();
-    const { id } = params;
-
     const history = useHistory();
-    console.log(props)
+    const location = useLocation();
+    const id = location.pathname.split('/edit-product/')[1];
+
     const {
         values,
         setValues,
@@ -65,11 +64,13 @@ const ProductForm = ({ ...props }) => {
         }
     }, [props.currentProduct.name])
 
-    console.log(id)
+    useLayoutEffect(() => {
+        window.scrollTo(0, 0)
+    }, [location.pathname])
 
     return (
         <>
-            <Cover subtitle="Boxing Store" title={true ? "Add Product" : "Edit Product"} />
+            <Cover subtitle="Boxing Store" title={id ? "Edit Product" : "Add Product"} />
 
             <div className="contact-from-section mt-150 mb-150">
                 <div className="container">
@@ -84,13 +85,13 @@ const ProductForm = ({ ...props }) => {
                                                 type="text"
                                                 placeholder="Name"
                                                 name="name"
-                                                value={values.name}
+                                                value={values.name ? values.name : ''}
                                                 onChange={handleInputChange}
                                                 id="name" />
                                             <select
                                                 className="custom-select custom-select-alt"
                                                 name="categoryId"
-                                                value={values.categoryId}
+                                                value={values.categoryId ? values.categoryId : ''}
                                                 onChange={handleInputChange}
                                                 id="categoryId">
                                                 <option value="" disabled>Category</option>
@@ -105,20 +106,20 @@ const ProductForm = ({ ...props }) => {
                                             <input type="text"
                                                 placeholder="Brand"
                                                 name="brand"
-                                                value={values.brand}
+                                                value={values.brand ? values.brand : ''}
                                                 onChange={handleInputChange}
                                                 id="brand" />
                                             <input type="text"
                                                 placeholder="Price"
                                                 name="price"
-                                                value={values.price}
+                                                value={values.price ? values.price : ''}
                                                 onChange={handleInputChange}
                                                 id="price" />
                                         </p>
                                         <p>
                                             <textarea
                                                 name="description"
-                                                value={values.description}
+                                                value={values.description ? values.description : ''}
                                                 onChange={handleInputChange}
                                                 id="description"
                                                 cols="30"
@@ -130,7 +131,7 @@ const ProductForm = ({ ...props }) => {
                                                 placeholder="Image: https://image.url/picture.png"
                                                 name="imageUrl"
                                                 className="contact-form-full"
-                                                value={values.imageUrl}
+                                                value={values.imageUrl ? values.imageUrl : ''}
                                                 onChange={handleInputChange}
                                                 id="imageUrl" />
                                         </p>
@@ -139,21 +140,21 @@ const ProductForm = ({ ...props }) => {
                                                 placeholder="Quantity S"
                                                 name="quantityS"
                                                 className="contact-form-one-third"
-                                                value={values.quantityS}
+                                                value={values.quantityS ? values.quantityS : ''}
                                                 onChange={handleInputChange}
                                                 id="quantityS" />
                                             <input type="number"
                                                 placeholder="Quantity M"
                                                 name="quantityM"
                                                 className="contact-form-one-third"
-                                                value={values.quantityM}
+                                                value={values.quantityM ? values.quantityM : ''}
                                                 onChange={handleInputChange}
                                                 id="quantityM" />
                                             <input type="number"
                                                 placeholder="Quantity L"
                                                 name="quantityL"
                                                 className="contact-form-one-third"
-                                                value={values.quantityL}
+                                                value={values.quantityL ? values.quantityL : ''}
                                                 onChange={handleInputChange}
                                                 id="quantityL" />
                                         </p>
